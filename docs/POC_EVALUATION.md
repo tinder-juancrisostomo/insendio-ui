@@ -42,6 +42,19 @@ We did **not** evaluate:
 - For existing projects on other libraries: migrate only if ROI is clear (e.g. reducing bundle size, unifying stack).
 - Prefer **strangler pattern**: new features use Shadcn; legacy stays until rewrite.
 
+#### Strangler Pattern Explained
+
+The **strangler fig pattern** (from Martin Fowler) is a gradual migration strategy. Instead of a big-bang rewrite, you:
+
+1. **Leave legacy code in place** – Don't touch existing screens or components that work.
+2. **Build new features with the new stack** – Every new page, feature, or component uses Shadcn (or the chosen library).
+3. **Replace legacy only when touched** – When you need to change an old screen, migrate it to Shadcn as part of that work.
+4. **Eventually, legacy shrinks** – Over time, the old library is "strangled" as more of the app uses the new stack.
+
+**Why use it:** Avoids risky all-at-once migrations, spreads effort over time, and lets you ship value while migrating. Both stacks can coexist in the same app during the transition.
+
+**For UI libraries:** New routes use Shadcn components; old routes keep MUI/DaisyUI/etc. until they're refactored or the app is retired.
+
 ### Effort Estimate
 
 | Task | Effort |
