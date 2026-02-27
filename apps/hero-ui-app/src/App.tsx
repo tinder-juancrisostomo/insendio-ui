@@ -24,6 +24,7 @@ import {
   MenuList,
   MenuItem,
   Alert,
+  Switch,
 } from '@design-system/hero-ui';
 
 const heroUiComponents: InsendioComponents = {
@@ -48,6 +49,7 @@ const heroUiComponents: InsendioComponents = {
   MenuList,
   MenuItem,
   Alert,
+  Switch,
 };
 
 export default function App() {

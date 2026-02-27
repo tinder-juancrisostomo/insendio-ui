@@ -52,6 +52,10 @@ Specialization is a React composition pattern: a **specialized** component wraps
 | `InsendioNavLink` | NavLink | Sidebar nav styling |
 | `InsendioAlert` | Alert | Info/success alert styling |
 | `InsendioInfoAlert` | InsendioAlert | Info alert with icon |
+| `InsendioTable` | Table | Table with Insendio styling |
+| `InsendioTableToolbar` | Box | Table toolbar (filters, actions) |
+| `InsendioList` / `InsendioListItem` | Box | List layout components |
+| `InsendioRateLimitCard` | Box | Rate limit display card |
 
 ### Example: InsendioCard
 
@@ -89,6 +93,8 @@ insendio-app/
 ├── src/
 │   ├── InsendioApp.tsx       # Routes, lazy-loaded pages
 │   ├── components-context.tsx
+│   ├── theme-context.tsx
+│   ├── accessibility-context.tsx
 │   ├── mock-data.ts
 │   ├── components/
 │   │   ├── InsendioLayout.tsx
@@ -97,11 +103,16 @@ insendio-app/
 │   │       ├── InsendioTab.tsx
 │   │       ├── InsendioCard.tsx
 │   │       ├── InsendioAlert.tsx
+│   │       ├── InsendioTable.tsx
+│   │       ├── InsendioTableToolbar.tsx
+│   │       ├── InsendioList.tsx
+│   │       ├── InsendioRateLimitCard.tsx
 │   │       └── ...
 │   └── pages/
 │       ├── HomePage.tsx
 │       ├── DataPage.tsx
 │       ├── RolesPage.tsx
+│       ├── AccessibilityPage.tsx
 │       └── ...
 ```
 

@@ -26,7 +26,7 @@ content: [
 Import tokens CSS in your app entry (e.g. `main.tsx`):
 
 ```ts
-import '@design-system/tokens/dist/tokens.css';
+import '@design-system/tokens/css';
 ```
 
 Apply theme class to root for light/dark:
@@ -42,7 +42,7 @@ Apply theme class to root for light/dark:
 | **Shadcn** | Tailwind + tokens.css |
 | **HeroUI** | Tailwind + tokens.css |
 | **DaisyUI** | Tailwind + DaisyUI plugin + tokens.css |
-| **MUI** | Tailwind + tokens.css (Button uses @mui/material) |
+| **MUI** | Tailwind + tokens.css (package includes @mui/material) |
 
 ## Library Switching & Conflicts
 

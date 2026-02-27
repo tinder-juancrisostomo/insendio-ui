@@ -17,7 +17,7 @@ export function Tabs(props: BaseTabsProps) {
 export function TabList({ className, ...props }: BaseTabListProps) {
   return (
     <BaseTabList
-      className={cn('inline-flex h-10 items-center justify-center rounded-md bg-gray-100 p-1', className)}
+      className={cn('inline-flex h-10 items-center justify-start rounded-md bg-[var(--ds-bg-muted)] p-1', className)}
       {...props}
     />
   );
@@ -27,8 +27,10 @@ export function Tab({ className, ...props }: BaseTabProps) {
   return (
     <BaseTab
       className={cn(
-        'inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-white transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-sm',
-        'aria-selected:bg-white aria-selected:text-gray-900 aria-selected:shadow-sm',
+        'inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ds-border-focus)] disabled:pointer-events-none disabled:opacity-50',
+        'data-[state=active]:bg-[var(--ds-bg-surface)] data-[state=active]:text-[var(--ds-text-primary)] data-[state=active]:shadow-sm',
+        'aria-selected:bg-[var(--ds-bg-surface)] aria-selected:text-[var(--ds-text-primary)] aria-selected:shadow-sm',
+        'text-[var(--ds-text-secondary)] hover:text-[var(--ds-text-primary)]',
         className
       )}
       {...props}

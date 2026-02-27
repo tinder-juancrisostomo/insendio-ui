@@ -8,6 +8,7 @@ export interface InsendioNavLinkProps {
   end?: boolean;
   className?: string;
   'aria-label'?: string;
+  onClick?: () => void;
 }
 
 /**
@@ -20,12 +21,14 @@ export function InsendioNavLink({
   end,
   className,
   'aria-label': ariaLabel,
+  onClick,
 }: InsendioNavLinkProps) {
   return (
     <NavLink
       to={to}
       end={end}
       aria-label={ariaLabel}
+      onClick={onClick}
       className={({ isActive }) =>
         cn(
           'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors',

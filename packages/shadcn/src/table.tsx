@@ -22,7 +22,7 @@ Table.displayName = 'Table';
 
 export const TableHeader = React.forwardRef<HTMLTableSectionElement, BaseTableHeaderProps>(
   ({ className, ...props }, ref) => (
-    <BaseTableHeader ref={ref} className={cn('border-b border-gray-200', className)} {...props} />
+    <BaseTableHeader ref={ref} className={cn('border-b border-[var(--ds-border-default)]', className)} {...props} />
   )
 );
 TableHeader.displayName = 'TableHeader';
@@ -38,7 +38,7 @@ export const TableRow = React.forwardRef<HTMLTableRowElement, BaseTableRowProps>
   ({ className, ...props }, ref) => (
     <BaseTableRow
       ref={ref}
-      className={cn('border-b border-gray-200 transition-colors hover:bg-gray-50', className)}
+      className={cn('border-b border-[var(--ds-border-default)] transition-colors hover:bg-[var(--ds-bg-muted)] [&:nth-child(even)]:bg-[var(--ds-bg-muted)]/50 [&:nth-child(even)]:hover:bg-[var(--ds-bg-muted)]', className)}
       {...props}
     />
   )
@@ -49,7 +49,7 @@ export const TableCell = React.forwardRef<HTMLTableCellElement, BaseTableCellPro
   ({ className, ...props }, ref) => (
     <BaseTableCell
       ref={ref}
-      className={cn('p-4 align-middle [&:has([role=checkbox])]:pr-0', className)}
+      className={cn('px-4 py-3 text-sm align-middle text-[var(--ds-text-primary)] [&:has([role=checkbox])]:pr-0', className)}
       {...props}
     />
   )

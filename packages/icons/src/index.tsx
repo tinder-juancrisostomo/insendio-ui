@@ -1,6 +1,7 @@
 export type { IconProps } from './types';
 export { createIcon } from './icon-base';
 export { BellIcon } from './bell';
+export { BarsIcon } from './bars';
 export { LightningIcon } from './lightning';
 export { HouseIcon } from './house';
 export { ChevronDownIcon } from './chevron-down';
@@ -9,6 +10,8 @@ export { SearchIcon } from './search';
 export { FilterIcon } from './filter';
 export { PlusIcon } from './plus';
 export { SettingsIcon } from './settings';
+export { SunIcon } from './sun';
+export { MoonIcon } from './moon';
 export { LinkIcon } from './link';
 export { UsersIcon } from './users';
 export { PersonIcon } from './person';

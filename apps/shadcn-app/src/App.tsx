@@ -24,6 +24,7 @@ import {
   MenuList,
   MenuItem,
   Alert,
+  Switch,
 } from '@design-system/shadcn';
 
 const shadcnComponents: InsendioComponents = {
@@ -48,6 +49,7 @@ const shadcnComponents: InsendioComponents = {
   MenuList,
   MenuItem,
   Alert,
+  Switch,
 };
 
 export default function App() {

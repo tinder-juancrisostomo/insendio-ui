@@ -2,9 +2,10 @@
   "name": "design-system-ai",
   "version": "1.0.0",
   "private": true,
-  "description": "Custom UI component library monorepo with design system",
+  "description": "UI libraries PoC - compare Shadcn, Hero UI, DaisyUI, MUI for internal projects",
   "scripts": {
-    "dev": "pnpm --filter docs dev",
+    "dev": "pnpm --filter \"./apps/*\" run dev",
+    "dev:docs": "pnpm --filter docs dev",
     "dev:mui": "pnpm --filter mui-app dev",
     "dev:hero-ui": "pnpm --filter hero-ui-app dev",
     "dev:shadcn": "pnpm --filter shadcn-app dev",

@@ -1,6 +1,18 @@
-# Design System AI - Component Library Monorepo
+# UI libraries PoC AI
 
-A custom UI component library monorepo with multiple styling variants, built on W3C ARIA APG patterns for accessibility.
+A **Proof of Concept** to analyze which UI library best fits our next internal projects. This monorepo compares four styling approaches (Shadcn, Hero UI, DaisyUI, MUI) on top of a shared headless base, built on W3C ARIA APG patterns for accessibility.
+
+## Executive Summary
+
+| | |
+|---|---|
+| **Goal** | Choose a UI library for our next internal projects |
+| **Options** | Shadcn, Hero UI, DaisyUI, MUI |
+| **Recommendation** | **Shadcn** – lightweight, Tailwind-native, full control |
+| **Key risks** | Manual component sync; mitigated by versioning in monorepo |
+| **Next step** | Pilot in one greenfield project (1–2 sprints) |
+
+See [docs/UI_LIBRARIES_COMPARISON.md](docs/UI_LIBRARIES_COMPARISON.md) for the full analysis and [docs/POC_EVALUATION.md](docs/POC_EVALUATION.md) for adoption path and limitations.
 
 ## Structure
 
@@ -26,6 +38,10 @@ design-system-ai/
     ├── hero-ui-app/   # Insendio app with Hero UI components
     └── docs/          # Documentation app
 ```
+
+## PoC Purpose
+
+This PoC evaluates **Shadcn**, **Hero UI**, **DaisyUI**, and **MUI** to help decide which UI library to adopt for our next internal projects. See [docs/UI_LIBRARIES_COMPARISON.md](docs/UI_LIBRARIES_COMPARISON.md) for the full analysis and recommendation.
 
 ## Features
 
@@ -56,14 +72,40 @@ pnpm dev:hero-ui    # Hero UI-styled
 pnpm dev
 ```
 
+## Try It Yourself
+
+To evaluate the libraries side by side:
+
+1. Run each app and compare the same Insendio demo:
+   ```bash
+   pnpm dev:shadcn     # Recommended
+   pnpm dev:daisyui
+   pnpm dev:hero-ui
+   pnpm dev:mui
+   ```
+2. Check bundle size: `pnpm build` and inspect `apps/*/dist/` (see [docs/UI_LIBRARIES_COMPARISON.md](docs/UI_LIBRARIES_COMPARISON.md#bundle-size-production-build)).
+3. Read the comparison doc and recommendation.
+
 ## Documentation
 
 | Document | Description |
 |----------|-------------|
+| [docs/UI_LIBRARIES_COMPARISON.md](docs/UI_LIBRARIES_COMPARISON.md) | **Overview, pros, cons, and recommendation** |
+| [docs/TERMS.md](docs/TERMS.md) | **Important terms** (headless, design tokens, etc.) |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Monorepo structure, package layers, data flow |
 | [docs/STYLING.md](docs/STYLING.md) | Tailwind, MUI, DaisyUI, Shadcn styling approach |
 | [docs/CLASSNAMES.md](docs/CLASSNAMES.md) | How `className` flows through the component stack |
 | [docs/INSENDIO-APP.md](docs/INSENDIO-APP.md) | Insendio app, specialization pattern, component context |
+| [docs/POC_EVALUATION.md](docs/POC_EVALUATION.md) | **Limitations, adoption path, team fit, next steps** |
+
+## Next Steps
+
+1. **Review** – Share this PoC with the team; discuss the recommendation.
+2. **Pilot** – Pick a greenfield project; use Shadcn for 1–2 sprints.
+3. **Retro** – After pilot, confirm or adjust the choice.
+4. **Standardize** – Add Shadcn to our design system; update templates and docs.
+
+See [docs/POC_EVALUATION.md](docs/POC_EVALUATION.md) for details.
 
 ## Components
 

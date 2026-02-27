@@ -24,6 +24,7 @@ import {
   MenuList,
   MenuItem,
   Alert,
+  Switch,
 } from '@design-system/mui';
 
 const muiComponents: InsendioComponents = {
@@ -48,6 +49,7 @@ const muiComponents: InsendioComponents = {
   MenuList,
   MenuItem,
   Alert,
+  Switch,
 };
 
 export default function App() {

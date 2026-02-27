@@ -25,6 +25,14 @@
   --ds-text-link: #1976D2;
   --ds-text-link-hover: #1565C0;
 
+  /* Tab active states (text, icons, bottom border) */
+  --ds-tab-active-blue: oklch(54.6% 0.245 262.881);
+  --ds-tab-active-purple: oklch(55.8% 0.288 302.321);
+
+  /* Insendio primary button (purple CTA) */
+  --ds-insendio-primary: #7B1FA2;
+  --ds-insendio-primary-hover: #6A1B9A;
+
   /* Borders */
   --ds-border-default: #E0E0E0;
   --ds-border-muted: #EAEAEA;
@@ -73,6 +81,13 @@
   --ds-text-inverse: #212529;
   --ds-text-link: #64B5F6;
   --ds-text-link-hover: #90CAF9;
+
+  --ds-tab-active-blue: oklch(65% 0.22 262.881);
+  --ds-tab-active-purple: oklch(68% 0.25 302.321);
+
+  /* Insendio primary button - softer purple for dark mode */
+  --ds-insendio-primary: #6B5B8A;
+  --ds-insendio-primary-hover: #7D6B9C;
 
   --ds-border-default: #444444;
   --ds-border-muted: #383838;
@@ -195,4 +210,53 @@
   padding: 0.6rem;
   width: 2.5rem;
   height: 2.5rem;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Accessibility preferences (from /accessibility page)                        */
+/* -------------------------------------------------------------------------- */
+
+.ds-reduce-motion *,
+.ds-reduce-motion *::before,
+.ds-reduce-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+.ds-high-contrast {
+  --ds-text-primary: #000000;
+  --ds-text-secondary: #333333;
+  --ds-border-default: #000000;
+}
+.ds-high-contrast.ds-dark {
+  --ds-text-primary: #FFFFFF;
+  --ds-text-secondary: #E0E0E0;
+  --ds-bg-page: #000000;
+  --ds-bg-surface: #111111;
+  --ds-bg-muted: #222222;
+  --ds-border-default: #FFFFFF;
+}
+
+.ds-large-text {
+  font-size: 112.5%;
+}
+.ds-large-text body {
+  font-size: 1.125rem;
+}
+
+.ds-reduced-transparency {
+  --ds-bg-page: #F8F9FA;
+  --ds-bg-surface: #FFFFFF;
+  --ds-bg-muted: #F0F0F0;
+}
+.ds-reduced-transparency.ds-dark {
+  --ds-bg-page: #0D0D0D;
+  --ds-bg-surface: #1A1A1A;
+  --ds-bg-muted: #2D2D2D;
+}
+
+.ds-focus-visible *:focus-visible {
+  outline: 3px solid var(--ds-border-focus);
+  outline-offset: 2px;
 }

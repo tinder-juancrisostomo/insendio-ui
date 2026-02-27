@@ -3,8 +3,12 @@ import { useInsendioComponents } from '../../components-context';
 import { cn } from '@design-system/utils';
 
 const alertStyles = {
-  info: 'border border-[#2196F3] bg-[#E8F0FE]',
-  success: 'border border-[#2E7D32] bg-[#E8F5E9]',
+  info:
+    'border border-[#2196F3] bg-[#E8F0FE] text-[#1565C0] dark:bg-[#1A2F4A] dark:border-[#64B5F6] dark:text-[var(--ds-text-primary)]',
+  success:
+    'border border-[#2E7D32] bg-[#E8F5E9] text-[#1B5E20] dark:bg-[#1A3D1F] dark:border-[#4CAF50] dark:text-[var(--ds-text-primary)]',
+  warning:
+    'border border-[#E65100] bg-[#FFF3E0] text-[#E65100] dark:bg-[#4A3520] dark:border-[#FFB74D] dark:text-[var(--ds-text-primary)]',
 } as const;
 
 export type InsendioAlertVariant = keyof typeof alertStyles;
@@ -45,7 +49,7 @@ export function InsendioInfoAlert({ children, className }: InsendioInfoAlertProp
   return (
     <InsendioAlert variant="info" className={className}>
       <Inline gap={2} align="center">
-        <InfoIcon size={20} className="text-[#1565C0]" />
+        <InfoIcon size={20} className="text-[#1565C0] dark:text-[var(--ds-text-link)]" />
         {children}
       </Inline>
     </InsendioAlert>

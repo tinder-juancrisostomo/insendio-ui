@@ -23,6 +23,7 @@ export interface InsendioComponents {
   MenuList: React.ComponentType<any>;
   MenuItem: React.ComponentType<any>;
   Alert: React.ComponentType<any>;
+  Switch: React.ComponentType<any>;
 }
 
 const InsendioComponentsContext = React.createContext<InsendioComponents | null>(null);

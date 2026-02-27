@@ -30,8 +30,8 @@ export function InsendioStatCard({
   return (
     <Box
       className={cn(
-        'flex-1 min-w-[180px] rounded-xl border border-[var(--ds-border-default)] bg-white shadow-sm p-6',
-        size === 'compact' && 'min-w-[180px] rounded-lg p-4 bg-[var(--ds-bg-surface)]',
+        'flex-1 min-w-0 sm:min-w-[180px] rounded-xl border border-[var(--ds-border-default)] bg-[var(--ds-bg-surface)] shadow-sm p-4 sm:p-6',
+        size === 'compact' && 'min-w-0 sm:min-w-[180px] rounded-lg p-3 sm:p-4 bg-[var(--ds-bg-surface)]',
         className
       )}
     >

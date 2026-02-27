@@ -4,7 +4,7 @@ import { cn } from '@design-system/utils';
 export interface InsendioCardProps {
   children: React.ReactNode;
   className?: string;
-  /** 'default' = white bg, 'surface' = ds-bg-surface */
+  /** 'default' = surface bg (theme-aware), 'surface' = same */
   variant?: 'default' | 'surface';
 }
 
@@ -22,8 +22,7 @@ export function InsendioCard({
     <Box
       className={cn(
         'rounded-xl border border-[var(--ds-border-default)] shadow-sm',
-        variant === 'default' && 'bg-white',
-        variant === 'surface' && 'bg-[var(--ds-bg-surface)]',
+        (variant === 'default' || variant === 'surface') && 'bg-[var(--ds-bg-surface)]',
         className
       )}
     >

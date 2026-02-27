@@ -20,7 +20,7 @@ export function InsendioPrimaryButton({
   disabled,
   onClick,
   type = 'button',
-}: InsendioPrimaryButtonProps) {
+}: Readonly<InsendioPrimaryButtonProps>) {
   const { Button } = useInsendioComponents();
   return (
     <Button
@@ -29,7 +29,7 @@ export function InsendioPrimaryButton({
       disabled={disabled}
       onClick={onClick}
       type={type}
-      className={cn('bg-[#7B1FA2] hover:bg-[#6A1B9A]', className)}
+      className={cn('!bg-[var(--ds-insendio-primary)] hover:!bg-[var(--ds-insendio-primary-hover)] !text-white', className)}
     >
       {children}
     </Button>

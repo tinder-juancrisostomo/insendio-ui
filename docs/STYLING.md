@@ -27,8 +27,8 @@ Tailwind scans these paths and generates CSS only for the utility classes that a
 
 ### MUI (`@design-system/mui`)
 
-- **Styling**: Tailwind utility classes only
-- **Naming**: "MUI" refers to a Material-inspired visual style, not the @mui/material library
+- **Styling**: Tailwind utility classes + design tokens (`ds-btn`, etc.)
+- **Dependency**: Package includes `@mui/material` (adds bundle size; some components may use it)
 - **Example** (Alert):
 
 ```tsx
