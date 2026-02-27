@@ -1,0 +1,11 @@
+packages:
+  - packages/*
+  - apps/*
+
+onlyBuiltDependencies:
+  - '@heroui/shared-utils'
+  - esbuild
+
+peerDependencyRules:
+  allowedVersions:
+    tailwindcss: '3'

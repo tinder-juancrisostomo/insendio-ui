@@ -1,0 +1,198 @@
+/**
+ * Design System CSS Variables
+ * Import this file and apply .ds-light or .ds-dark to root for theming
+ */
+
+:root,
+.ds-light {
+  /* Backgrounds */
+  --ds-bg-page: #F8F9FA;
+  --ds-bg-surface: #FFFFFF;
+  --ds-bg-elevated: #FFFFFF;
+  --ds-bg-muted: #F0F0F0;
+  --ds-bg-input: #FFFFFF;
+  --ds-bg-active-tab: #EDE7F6;
+  --ds-bg-success: #E8F5E9;
+  --ds-bg-info: #E8F0FE;
+  --ds-bg-warning: #FFF3E0;
+  --ds-bg-error: #FFE0E0;
+
+  /* Text */
+  --ds-text-primary: #212529;
+  --ds-text-secondary: #6C757D;
+  --ds-text-muted: #888888;
+  --ds-text-inverse: #FFFFFF;
+  --ds-text-link: #1976D2;
+  --ds-text-link-hover: #1565C0;
+
+  /* Borders */
+  --ds-border-default: #E0E0E0;
+  --ds-border-muted: #EAEAEA;
+  --ds-border-focus: #2196F3;
+
+  /* Focus & Shadow */
+  --ds-focus-ring: 0 0 0 2px rgba(33, 150, 243, 0.5);
+  --ds-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --ds-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+
+  /* Spacing */
+  --ds-space-1: 0.25rem;
+  --ds-space-2: 0.5rem;
+  --ds-space-3: 0.75rem;
+  --ds-space-4: 1rem;
+  --ds-space-5: 1.25rem;
+  --ds-space-6: 1.5rem;
+
+  /* Radius */
+  --ds-radius-sm: 4px;
+  --ds-radius-md: 6px;
+  --ds-radius-lg: 8px;
+
+  /* Typography */
+  --ds-font-sans: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --ds-font-size-sm: 0.875rem;
+  --ds-font-size-base: 1rem;
+  --ds-font-size-lg: 1.125rem;
+}
+
+.ds-dark {
+  --ds-bg-page: #1A1A1A;
+  --ds-bg-surface: #2D2D2D;
+  --ds-bg-elevated: #383838;
+  --ds-bg-muted: #404040;
+  --ds-bg-input: #2D2D2D;
+  --ds-bg-active-tab: #4A3F6B;
+  --ds-bg-success: #1B3D1F;
+  --ds-bg-info: #1A2F4A;
+  --ds-bg-warning: #3D2E1A;
+  --ds-bg-error: #3D1A1A;
+
+  --ds-text-primary: #FFFFFF;
+  --ds-text-secondary: #B0B0B0;
+  --ds-text-muted: #888888;
+  --ds-text-inverse: #212529;
+  --ds-text-link: #64B5F6;
+  --ds-text-link-hover: #90CAF9;
+
+  --ds-border-default: #444444;
+  --ds-border-muted: #383838;
+  --ds-border-focus: #64B5F6;
+
+  --ds-focus-ring: 0 0 0 2px rgba(100, 181, 246, 0.5);
+  --ds-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --ds-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Component classes (token-driven)                                           */
+/* -------------------------------------------------------------------------- */
+
+.ds-btn {
+  --ds-btn-bg: var(--ds-bg-surface);
+  --ds-btn-fg: var(--ds-text-primary);
+  --ds-btn-border: var(--ds-border-default);
+
+  appearance: none;
+  border: 1px solid var(--ds-btn-border);
+  background: var(--ds-btn-bg);
+  color: var(--ds-btn-fg);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ds-space-2);
+
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-font-size-sm);
+  font-weight: 600;
+  line-height: 1;
+
+  padding: 0.6rem 0.9rem;
+  border-radius: var(--ds-radius-md);
+
+  box-shadow: var(--ds-shadow-sm);
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
+  transition: filter 120ms ease, transform 120ms ease, background-color 120ms ease, color 120ms ease, border-color 120ms ease;
+}
+
+.ds-btn:hover {
+  filter: brightness(0.98);
+}
+
+.ds-btn:active {
+  transform: translateY(0.5px);
+}
+
+.ds-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--ds-shadow-sm), var(--ds-focus-ring);
+}
+
+.ds-btn:disabled,
+.ds-btn[aria-disabled='true'] {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.ds-btn--primary {
+  --ds-btn-bg: var(--ds-text-link);
+  --ds-btn-fg: var(--ds-text-inverse);
+  --ds-btn-border: transparent;
+}
+
+.ds-btn--secondary {
+  --ds-btn-bg: var(--ds-bg-muted);
+  --ds-btn-fg: var(--ds-text-primary);
+  --ds-btn-border: var(--ds-border-default);
+}
+
+.ds-btn--outline {
+  --ds-btn-bg: transparent;
+  --ds-btn-fg: var(--ds-text-primary);
+  --ds-btn-border: var(--ds-border-default);
+  box-shadow: none;
+}
+
+.ds-btn--destructive {
+  --ds-btn-bg: var(--ds-bg-error);
+  --ds-btn-fg: var(--ds-text-primary);
+  --ds-btn-border: var(--ds-border-default);
+}
+
+.ds-btn--ghost {
+  --ds-btn-bg: transparent;
+  --ds-btn-fg: var(--ds-text-primary);
+  --ds-btn-border: transparent;
+  box-shadow: none;
+}
+
+.ds-btn--link {
+  --ds-btn-bg: transparent;
+  --ds-btn-fg: var(--ds-text-link);
+  --ds-btn-border: transparent;
+  box-shadow: none;
+  padding: 0;
+  border-radius: 0;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.ds-btn--sm {
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--ds-radius-sm);
+}
+
+.ds-btn--lg {
+  padding: 0.75rem 1.1rem;
+  border-radius: var(--ds-radius-lg);
+}
+
+.ds-btn--icon {
+  padding: 0.6rem;
+  width: 2.5rem;
+  height: 2.5rem;
+}

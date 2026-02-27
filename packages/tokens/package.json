@@ -1,0 +1,29 @@
+{
+  "name": "@design-system/tokens",
+  "version": "1.0.0",
+  "description": "Design tokens for Insendio design system - light/dark modes, mobile-first",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./css": {
+      "import": "./dist/tokens.css",
+      "require": "./dist/tokens.css",
+      "types": "./dist/tokens.css.d.ts"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts && node -e \"require('fs').copyFileSync('src/tokens.css','dist/tokens.css')\"",
+    "lint": "eslint src/"
+  },
+  "devDependencies": {
+    "tsup": "^8.3.5",
+    "typescript": "^5.6.3"
+  }
+}

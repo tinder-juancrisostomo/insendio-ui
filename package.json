@@ -1,0 +1,28 @@
+{
+  "name": "design-system-ai",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Custom UI component library monorepo with design system",
+  "scripts": {
+    "dev": "pnpm --filter docs dev",
+    "dev:mui": "pnpm --filter mui-app dev",
+    "dev:hero-ui": "pnpm --filter hero-ui-app dev",
+    "dev:shadcn": "pnpm --filter shadcn-app dev",
+    "dev:daisyui": "pnpm --filter daisyui-app dev",
+    "build": "pnpm -r build",
+    "build:docs": "pnpm --filter docs build",
+    "lint": "pnpm -r lint",
+    "test": "pnpm -r test"
+  },
+  "keywords": [
+    "design-system",
+    "ui-components",
+    "react",
+    "accessibility"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  }
+}
