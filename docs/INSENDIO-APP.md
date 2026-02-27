@@ -2,6 +2,16 @@
 
 The insendio-app is a demo application that showcases the design system with different component libraries. It uses a **polymorphic component** pattern and **specialization** for reusable, library-agnostic UI.
 
+## Screenshots
+
+**Home page** – AI assistant, suggested actions, and recent campaigns table:
+
+<img src="assets/insendio-home.png" alt="Insendio Home (Shadcn)" style="width: 100%; height: auto;">
+
+**Data page** – User Attributes with search, filters, and attribute cards:
+
+<img src="assets/insendio-data.png" alt="Insendio Data - User Attributes (Shadcn)" style="width: 350px; height: auto;">
+
 ## Component Context
 
 insendio-app does not import components from mui, daisyui, etc. Instead, it receives them via React Context:

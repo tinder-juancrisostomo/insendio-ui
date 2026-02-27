@@ -13,6 +13,7 @@ Technical documentation for the UI libraries Proof of Concept monorepo.
 | [CLASSNAMES.md](CLASSNAMES.md) | How `className` flows from insendio-app → styled package → DOM |
 | [INSENDIO-APP.md](INSENDIO-APP.md) | Component context, specialization pattern, app structure |
 | [POC_EVALUATION.md](POC_EVALUATION.md) | **Limitations, adoption path, team fit, next steps** |
+| [DOCS_APP.md](DOCS_APP.md) | **Docs app** – component showcase, library switcher, configuration |
 
 ## Quick Links
 

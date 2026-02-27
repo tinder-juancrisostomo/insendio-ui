@@ -101,6 +101,7 @@ To evaluate the libraries side by side:
 | [docs/CLASSNAMES.md](docs/CLASSNAMES.md) | How `className` flows through the component stack |
 | [docs/INSENDIO-APP.md](docs/INSENDIO-APP.md) | Insendio app, specialization pattern, component context |
 | [docs/POC_EVALUATION.md](docs/POC_EVALUATION.md) | **Limitations, adoption path, team fit, next steps** |
+| [docs/DOCS_APP.md](docs/DOCS_APP.md) | **Docs app** – component showcase, library switcher |
 
 ## Next Steps
 
