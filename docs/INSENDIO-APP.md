@@ -128,10 +128,10 @@ When `library` is not provided, the suffix is omitted.
 ## Running the App
 
 ```bash
-pnpm dev:mui        # MUI components
+pnpm dev:shadcn     # Shadcn components (recommended)
 pnpm dev:daisyui    # DaisyUI components
-pnpm dev:shadcn     # Shadcn components
 pnpm dev:hero-ui    # Hero UI components
+pnpm dev:mui        # MUI components
 ```
 
-Each command runs the same insendio-app with a different component library injected via context.
+Each command runs the same Insendio app with a different component library injected via context. Use `pnpm dev:docs` for the docs app; `pnpm dev` runs all apps.

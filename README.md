@@ -59,16 +59,19 @@ This PoC evaluates **Shadcn**, **Hero UI**, **DaisyUI**, and **MUI** to help dec
 # Install dependencies
 pnpm install
 
-# Build all packages
+# Build all packages and apps
 pnpm build
 
-# Run demo apps (Insendio with different component libraries)
-pnpm dev:mui        # MUI-styled
+# Run a demo app (Insendio with different component libraries)
+pnpm dev:shadcn     # Shadcn-styled (recommended)
 pnpm dev:daisyui    # DaisyUI-styled
-pnpm dev:shadcn     # Shadcn-styled
 pnpm dev:hero-ui    # Hero UI-styled
+pnpm dev:mui        # MUI-styled
 
-# Run docs app
+# Run docs app (component demos)
+pnpm dev:docs
+
+# Run all apps at once
 pnpm dev
 ```
 
@@ -83,8 +86,9 @@ To evaluate the libraries side by side:
    pnpm dev:hero-ui
    pnpm dev:mui
    ```
-2. Check bundle size: `pnpm build` and inspect `apps/*/dist/` (see [docs/UI_LIBRARIES_COMPARISON.md](docs/UI_LIBRARIES_COMPARISON.md#bundle-size-production-build)).
-3. Read the comparison doc and recommendation.
+2. Run the docs app for component demos: `pnpm dev:docs`
+3. Check bundle size: `pnpm build` and inspect `apps/*/dist/` (see [docs/UI_LIBRARIES_COMPARISON.md](docs/UI_LIBRARIES_COMPARISON.md#bundle-size-production-build)).
+4. Read the comparison doc and recommendation.
 
 ## Documentation
 
