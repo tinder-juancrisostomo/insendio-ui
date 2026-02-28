@@ -10,6 +10,7 @@ export const environments = [
 
 export const navItems = [
   { id: 'home', label: 'Home', path: '/', icon: 'house' },
+  { id: 'dashboard', label: 'Dashboard', path: '/dashboard', icon: 'chart-bar' },
   { id: 'notifications', label: 'Notifications', path: '/notifications', icon: 'bell' },
   { id: 'segments', label: 'Segments', path: '/segments', icon: 'users' },
   { id: 'monitoring', label: 'Monitoring', path: '/monitoring', icon: 'chart-line' },
@@ -437,6 +438,174 @@ export const roleUserCounts: Record<string, number> = {
   'campaign-manager': 2,
   editor: 1,
   viewer: 1,
+};
+
+export const dashboardTabs = [
+  { id: 'overview', label: 'Overview' },
+  { id: 'user-behavior', label: 'User Behavior' },
+  { id: 'performance', label: 'Performance' },
+  { id: 'flows', label: 'Flows' },
+] as const;
+
+export const flowsKpis = [
+  { id: '1', label: 'Conversion Rate', value: '12.4%', change: 2.1, trend: 'up' as const, compare: 'vs last month' },
+  { id: '2', label: 'Drop-off at Checkout', value: '34%', change: 3.2, trend: 'down' as const, compare: 'vs last month' },
+  { id: '3', label: 'Avg. Journey Steps', value: '4.2', change: 0.3, trend: 'up' as const, compare: 'vs last month' },
+  { id: '4', label: 'Completed Purchases', value: '2,847', change: 18.5, trend: 'up' as const, compare: 'vs last month' },
+] as const;
+
+/** User journey / conversion flow for Network Graph */
+export const conversionFlowData = {
+  nodes: [
+    { id: 1, label: 'Landing', title: 'User lands on site' },
+    { id: 2, label: 'Browse', title: 'Browse products or content' },
+    { id: 3, label: 'Sign Up', title: 'Create account' },
+    { id: 4, label: 'Onboard', title: 'Complete onboarding' },
+    { id: 5, label: 'First Action', title: 'First meaningful action' },
+    { id: 6, label: 'Cart', title: 'Add to cart' },
+    { id: 7, label: 'Checkout', title: 'Proceed to checkout' },
+    { id: 8, label: 'Purchase', title: 'Complete purchase' },
+    { id: 9, label: 'Churn', title: 'User left / inactive' },
+  ],
+  edges: [
+    { from: 1, to: 2 },
+    { from: 1, to: 3 },
+    { from: 2, to: 3 },
+    { from: 2, to: 6 },
+    { from: 3, to: 4 },
+    { from: 4, to: 5 },
+    { from: 4, to: 9 },
+    { from: 5, to: 6 },
+    { from: 5, to: 9 },
+    { from: 6, to: 7 },
+    { from: 6, to: 9 },
+    { from: 7, to: 8 },
+    { from: 7, to: 9 },
+  ],
+};
+
+export const overviewKpis = [
+  { id: '1', label: 'Unique Visitors', value: '23,876', change: 24.5, trend: 'up' as const, compare: 'Compare to last week' },
+  { id: '2', label: 'Page View', value: '30,450', change: 20.5, trend: 'up' as const, compare: 'Compare to last week' },
+  { id: '3', label: 'Events', value: '34,789', change: 20.5, trend: 'down' as const, compare: 'Compare to last week' },
+  { id: '4', label: 'Live Visitor', value: '45,687', change: 24.5, trend: 'up' as const, compare: 'Compare to last week' },
+] as const;
+
+export const analysisChartData = {
+  labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+  datasets: [
+    { name: 'Page View', values: [420, 580, 720, 680, 820, 750, 890, 920, 850, 980, 910, 1000] },
+    { name: 'Unique Visitor', values: [280, 350, 420, 380, 480, 450, 520, 580, 510, 620, 590, 680] },
+  ],
+};
+
+export const topReferrers = [
+  { label: 'Direct', value: 16890 },
+  { label: 'Google.com', value: 12450 },
+  { label: 'Remix.com', value: 8920 },
+  { label: 'dev.to', value: 6540 },
+  { label: 'acpc.api.ic.io', value: 3210 },
+  { label: 'wewe.uv.us', value: 1890 },
+];
+
+export const topReferrersChartData = {
+  labels: topReferrers.map((s) => s.label),
+  datasets: [{ name: 'Traffic', values: topReferrers.map((s) => s.value) }],
+};
+
+export const topPages = [
+  { label: 'Home', value: 24500 },
+  { label: 'Pricing', value: 18200 },
+  { label: 'Change-log', value: 12400 },
+  { label: 'Feature', value: 9800 },
+  { label: 'Service', value: 7600 },
+  { label: 'About', value: 5400 },
+];
+
+export const topPagesChartData = {
+  labels: topPages.map((s) => s.label),
+  datasets: [{ name: 'Views', values: topPages.map((s) => s.value) }],
+};
+
+export const topSources = [
+  { label: 'No-Reference', value: 18900 },
+  { label: 'Medium', value: 12400 },
+  { label: 'remaixblock.com', value: 8200 },
+  { label: 'remaix-pge-block-hero', value: 5600 },
+  { label: 'remaix-pge-block-banner', value: 3400 },
+  { label: 'dev.io', value: 2100 },
+];
+
+export const topSourcesChartData = {
+  labels: topSources.map((s) => s.label),
+  datasets: [{ name: 'Traffic', values: topSources.map((s) => s.value) }],
+};
+
+export const userBehaviorKpis = [
+  { id: '1', label: 'Total Users', value: '23,876', change: 24.5, trend: 'up' as const, compare: 'vs last month' },
+  { id: '2', label: 'New Users', value: '30,450', change: 20.5, trend: 'up' as const, compare: 'vs last month' },
+  { id: '3', label: 'Current Users', value: '34,789', change: 20.5, trend: 'down' as const, compare: 'vs last month' },
+] as const;
+
+export const userOverviewData = {
+  labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+  datasets: [
+    { name: 'Active User', values: [520, 800, 650, 720, 680, 750, 620, 780, 710, 820, 760, 850] },
+    { name: 'Inactive User', values: [380, 700, 520, 580, 540, 620, 480, 650, 590, 680, 610, 720] },
+  ],
+};
+
+export const userTransactions = [
+  { id: '1', user: 'Stacy Reichel', amount: '$199.00', status: 'Success' as const, date: '14 May 2024 5:00 PM' },
+  { id: '2', user: 'Roderi Rohan', amount: '$267.00', status: 'Success' as const, date: '12 Jan 2024 3:45 PM' },
+  { id: '3', user: 'Audrey Leffler', amount: '$389.00', status: 'Cancel' as const, date: '04 Apr 2024 10:30 AM' },
+  { id: '4', user: 'Allison Mose', amount: '$199.00', status: 'Success' as const, date: '14 May 2024 11:40 AM' },
+];
+
+/** Traffic by device - pie chart (part-to-whole: % of traffic per device) */
+export const trafficByDevice = {
+  labels: ['Computer', 'Mobile', 'Tablet'],
+  datasets: [{ values: [55, 35, 10] }],
+};
+
+export const performanceKpis = [
+  { id: '1', label: 'Sales', value: '$9140.20', target: '$8295.50', percent: 110, trend: 'up' as const },
+  { id: '2', label: 'Profit', value: '$4593.35', target: '$4492.25', percent: 102, trend: 'up' as const },
+  { id: '3', label: 'Order', value: '23,876k', target: '24,926k', percent: 96, trend: 'down' as const },
+] as const;
+
+export const salesGrowthData = {
+  labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+  datasets: [
+    { name: 'Sales Growth', values: [12000, 15000, 18000, 19500, 21000, 22500, 23500, 24500, 23000, 25500, 26000, 26800] },
+    { name: 'Target', values: [10000, 12000, 15000, 17000, 18500, 20000, 21000, 20000, 22000, 24000, 25000, 26000] },
+  ],
+};
+
+export const bounceRateSources = [
+  { label: 'Direct', value: 16890 },
+  { label: 'Search', value: 4909 },
+  { label: 'Social', value: 550 },
+  { label: 'Ads', value: 140 },
+  { label: 'Mail', value: 8675 },
+  { label: 'Links', value: 4900 },
+];
+
+/** Chart data for Bounce Rate bar chart */
+export const bounceRateChartData = {
+  labels: bounceRateSources.map((s) => s.label),
+  datasets: [{ name: 'Traffic', values: bounceRateSources.map((s) => s.value) }],
+};
+
+/** Sales by country/region for Sale Mapping chart */
+export const salesByCountryData = {
+  labels: ['California', 'Texas', 'New York', 'Florida', 'Illinois', 'Ohio', 'Georgia', 'North Carolina'],
+  datasets: [{ name: 'Orders', values: [4200, 3800, 3100, 2800, 2100, 1900, 1650, 1420] }],
+};
+
+export const totalRevenueData = {
+  labels: ['Revenue', 'Remaining'],
+  datasets: [{ values: [75, 25] }],
 };
 
 export const suggestedActions = [

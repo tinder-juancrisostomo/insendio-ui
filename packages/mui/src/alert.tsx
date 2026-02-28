@@ -1,27 +1,35 @@
-import React from 'react';
-import { Alert as BaseAlert, type AlertProps as BaseAlertProps } from '@design-system/base';
-import { cn } from '@design-system/utils';
+import * as React from 'react';
+import MuiAlert from '@mui/material/Alert';
+import type { AlertProps as MuiAlertProps } from '@mui/material/Alert';
 
-export interface AlertProps extends BaseAlertProps {
+export interface AlertProps extends Omit<MuiAlertProps, 'severity' | 'variant'> {
+  children: React.ReactNode;
+  /** Design system variant - maps to MUI severity */
   variant?: 'default' | 'destructive' | 'success';
+  type?: 'polite' | 'assertive';
 }
 
-const variantClasses = {
-  default: 'rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-gray-900',
-  destructive: 'rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-red-900',
-  success: 'rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-green-900',
+const severityMap = {
+  default: 'info' as const,
+  destructive: 'error' as const,
+  success: 'success' as const,
 };
 
 export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
-  ({ className, variant = 'default', children, ...rest }, ref) => (
-    <BaseAlert
-      ref={ref}
-      className={cn(variantClasses[variant], className)}
-      {...rest}
-    >
-      {children}
-    </BaseAlert>
-  )
+  ({ variant = 'default', type = 'polite', children, ...props }, ref) => {
+    return (
+      <MuiAlert
+        ref={ref}
+        severity={severityMap[variant]}
+        role="alert"
+        aria-live={type}
+        aria-atomic
+        {...props}
+      >
+        {children}
+      </MuiAlert>
+    );
+  }
 );
 
 Alert.displayName = 'Alert';

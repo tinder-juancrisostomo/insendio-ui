@@ -8,6 +8,7 @@ import {
   HouseIcon,
   ChevronDownIcon,
   UsersIcon,
+  ChartBarIcon,
   ChartLineIcon,
   DatabaseIcon,
   SettingsIcon,
@@ -32,6 +33,7 @@ const navIcons: Record<string, React.ReactNode> = {
   bell: <BellIcon size={20} />,
   users: <UsersIcon size={20} />,
   "chart-line": <ChartLineIcon size={20} />,
+  "chart-bar": <ChartBarIcon size={20} />,
   database: <DatabaseIcon size={20} />,
 };
 
@@ -59,15 +61,17 @@ export function InsendioLayout() {
           {/* Left: hamburger (mobile) + logo + name + prod menu */}
           <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
             <div className="flex items-center gap-2 sm:gap-3 min-w-0 overflow-hidden flex-1">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-                className="lg:hidden shrink-0 !p-2 !min-w-0 rounded-lg text-[var(--ds-text-secondary)] hover:bg-[var(--ds-bg-muted)]"
-              >
-                <BarsIcon size={22} aria-hidden />
-              </Button>
+              <div className="lg:hidden shrink-0">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                  aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+                  className="!p-2 !min-w-0 rounded-lg text-[var(--ds-text-secondary)] hover:bg-[var(--ds-bg-muted)]"
+                >
+                  <BarsIcon size={22} aria-hidden />
+                </Button>
+              </div>
               <Box
                 className="flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-[#2196F3] to-[#1976D2] shadow-sm"
                 role="img"
@@ -82,11 +86,11 @@ export function InsendioLayout() {
                 Insendio{library ? ` (${library})` : ""}
               </Text>
             </div>
-            <div className="relative shrink-0">
+            <div className="relative shrink-0 hidden lg:block">
               <Menu>
               <MenuButton
                 className={cn(
-                  "hidden sm:inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium border-0 transition-colors [&[aria-expanded=true]_svg]:rotate-180",
+                  "inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium border-0 transition-colors [&[aria-expanded=true]_svg]:rotate-180",
                   envOptions.find((e) => e.id === selectedEnv)?.bg ?? "bg-[#E8F5E9] hover:bg-[#C8E6C9] dark:bg-[#1B3D1F] dark:hover:bg-[#2E5D32]",
                   envOptions.find((e) => e.id === selectedEnv)?.text ?? "text-[#2E7D32] dark:text-[#81C784]"
                 )}

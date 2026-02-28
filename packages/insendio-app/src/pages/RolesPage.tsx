@@ -1,6 +1,7 @@
+import { useState } from 'react';
 import { UsersIcon, ShieldIcon, CheckIcon, XIcon, SearchIcon, PencilIcon } from '@design-system/icons';
 import { Text } from '@design-system/typography';
-import { roles, permissions, rolePermissions, teamMembers, roleUserCounts } from '../mock-data';
+import { roles, permissions, rolePermissions, teamMembers as initialTeamMembers, roleUserCounts } from '../mock-data';
 import { useInsendioComponents } from '../components-context';
 import { cn } from '@design-system/utils';
 import { PageLayout, InsendioTab, InsendioTabList, InsendioCard, InsendioTable, InsendioInfoAlert, InsendioPrimaryButton } from '../components/insendio';
@@ -14,8 +15,39 @@ const roleColorClasses: Record<string, string> = {
 
 const displayedPermissions = ['CREATE CAMPAIGNS', 'SAVE SEGMENTS', 'APPROVE QA', 'EDIT DATA SOURCES', 'MANAGE USERS'] as const;
 
+type TeamMember = { id: string; name: string; email: string; roleId: string; lastActive: string };
+
 export function RolesPage() {
-  const { Box, Stack, Inline, Input, Button, Badge, Tabs, TabPanel, Table, TableHeader, TableBody, TableRow, TableCell } = useInsendioComponents();
+  const { Box, Stack, Inline, Input, Button, Badge, Tabs, TabPanel, Table, TableHeader, TableBody, TableRow, TableCell, Dialog, AlertDialog } = useInsendioComponents();
+  const [teamMembers, setTeamMembers] = useState<TeamMember[]>(() =>
+    initialTeamMembers.map((m) => ({ id: m.id, name: m.name, email: m.email, roleId: m.roleId, lastActive: m.lastActive }))
+  );
+  const [editMember, setEditMember] = useState<TeamMember | null>(null);
+  const [deleteMember, setDeleteMember] = useState<TeamMember | null>(null);
+  const [editForm, setEditForm] = useState({ name: '', email: '', roleId: '' });
+
+  const handleEditClick = (member: TeamMember) => {
+    setEditMember(member);
+    setEditForm({ name: member.name, email: member.email, roleId: member.roleId });
+  };
+
+  const handleSaveEdit = () => {
+    if (!editMember) return;
+    setTeamMembers((prev) =>
+      prev.map((m) =>
+        m.id === editMember.id
+          ? { ...m, name: editForm.name, email: editForm.email, roleId: editForm.roleId, lastActive: 'Just now' }
+          : m
+      )
+    );
+    setEditMember(null);
+  };
+
+  const handleDeleteConfirm = () => {
+    if (!deleteMember) return;
+    setTeamMembers((prev) => prev.filter((m) => m.id !== deleteMember.id));
+    setDeleteMember(null);
+  };
 
   return (
     <Tabs defaultSelectedId="team-members">
@@ -129,12 +161,17 @@ export function RolesPage() {
                           </Inline>
                         </Inline>
                         <Inline gap={2} className="shrink-0">
-                          <Button variant="outline" size="sm" className="rounded-lg">
+                          <Button variant="outline" size="sm" className="rounded-lg" onClick={() => handleEditClick(member)}>
                             <PencilIcon size={14} className="mr-1" />
                             Edit
                           </Button>
                           {!isAdmin && (
-                            <Button variant="outline" size="sm" className="rounded-lg text-[var(--ds-text-primary)] hover:bg-[var(--ds-bg-error)]">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="rounded-lg text-[var(--ds-text-primary)] hover:bg-[var(--ds-bg-error)] hover:border-[var(--ds-bg-error)]"
+                              onClick={() => setDeleteMember(member)}
+                            >
                               <XIcon size={14} className="mr-1" />
                               Delete
                             </Button>
@@ -220,6 +257,68 @@ export function RolesPage() {
           </Stack>
         </TabPanel>
       </PageLayout>
+
+      <Dialog open={!!editMember} onClose={() => setEditMember(null)} aria-labelledby="edit-member-title">
+        <Stack gap={4} className="p-6">
+          <Text id="edit-member-title" variant="h3" className="text-[var(--ds-text-primary)]">
+            Edit Team Member
+          </Text>
+          <Stack gap={3}>
+            <Stack gap={1}>
+              <Text variant="caption" className="text-[var(--ds-text-secondary)]">Name</Text>
+              <Input
+                value={editForm.name}
+                onChange={(e) => setEditForm((f) => ({ ...f, name: e.target.value }))}
+                placeholder="Full name"
+                className="rounded-lg border border-[var(--ds-border-default)] bg-[var(--ds-bg-input)]"
+              />
+            </Stack>
+            <Stack gap={1}>
+              <Text variant="caption" className="text-[var(--ds-text-secondary)]">Email</Text>
+              <Input
+                type="email"
+                value={editForm.email}
+                onChange={(e) => setEditForm((f) => ({ ...f, email: e.target.value }))}
+                placeholder="email@company.com"
+                className="rounded-lg border border-[var(--ds-border-default)] bg-[var(--ds-bg-input)]"
+              />
+            </Stack>
+            <Stack gap={1}>
+              <Text variant="caption" className="text-[var(--ds-text-secondary)]">Role</Text>
+              <select
+                value={editForm.roleId}
+                onChange={(e) => setEditForm((f) => ({ ...f, roleId: e.target.value }))}
+                className="rounded-lg border border-[var(--ds-border-default)] bg-[var(--ds-bg-input)] px-3 py-2 text-[var(--ds-text-primary)] w-full"
+              >
+                {roles.map((r) => (
+                  <option key={r.id} value={r.id}>{r.name}</option>
+                ))}
+              </select>
+            </Stack>
+          </Stack>
+          <Inline gap={2} justify="flex-end">
+            <Button variant="outline" onClick={() => setEditMember(null)}>Cancel</Button>
+            <Button variant="default" onClick={handleSaveEdit}>Save</Button>
+          </Inline>
+        </Stack>
+      </Dialog>
+
+      <AlertDialog open={!!deleteMember} onClose={() => setDeleteMember(null)}>
+        <Stack gap={4} className="p-6">
+          <Text id="delete-member-title" variant="h3" className="text-[var(--ds-text-primary)]">
+            Remove Team Member
+          </Text>
+          <Text id="delete-member-desc" variant="body" className="text-[var(--ds-text-secondary)]">
+            Are you sure you want to remove &quot;{deleteMember?.name}&quot; from the team? They will lose access to their role.
+          </Text>
+          <Inline gap={2} justify="flex-end">
+            <Button variant="outline" onClick={() => setDeleteMember(null)}>Cancel</Button>
+            <Button variant="destructive" onClick={handleDeleteConfirm}>
+              Remove
+            </Button>
+          </Inline>
+        </Stack>
+      </AlertDialog>
     </Tabs>
   );
 }

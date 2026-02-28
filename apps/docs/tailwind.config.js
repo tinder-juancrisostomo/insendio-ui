@@ -7,6 +7,7 @@ export default {
     '../../packages/hero-ui/src/**/*.{js,ts,jsx,tsx}',
     '../../packages/daisyui/src/**/*.{js,ts,jsx,tsx}',
     '../../packages/mui/src/**/*.{js,ts,jsx,tsx}',
+    '../../packages/charts/src/**/*.{js,ts,jsx,tsx}',
   ],
   darkMode: 'class',
   theme: {

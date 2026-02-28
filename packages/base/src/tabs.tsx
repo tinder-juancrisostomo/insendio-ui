@@ -167,13 +167,24 @@ export function Tab({ children, id, ...props }: TabProps) {
 export interface TabPanelProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   tabId: string;
+  /**
+   * When true (default), unmount panel content when the tab is inactive.
+   * When false, keep content mounted but hidden (preserves form state, etc.).
+   */
+  unmountWhenInactive?: boolean;
 }
 
-export function TabPanel({ children, tabId, ...props }: TabPanelProps) {
+export function TabPanel({
+  children,
+  tabId,
+  unmountWhenInactive = true,
+  ...props
+}: TabPanelProps) {
   const ctx = useContext(TabsContext);
   if (!ctx) throw new Error('TabPanel must be inside Tabs');
 
   const isSelected = ctx.selectedId === tabId;
+  const shouldRender = isSelected || !unmountWhenInactive;
 
   return (
     <div
@@ -184,7 +195,7 @@ export function TabPanel({ children, tabId, ...props }: TabPanelProps) {
       tabIndex={0}
       {...props}
     >
-      {children}
+      {shouldRender ? children : null}
     </div>
   );
 }

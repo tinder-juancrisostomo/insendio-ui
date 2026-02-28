@@ -4,6 +4,7 @@ import {
   type InsendioComponents,
 } from '@design-system/insendio-app';
 import {
+  DesignSystemThemeProvider,
   Box,
   Stack,
   Inline,
@@ -25,6 +26,8 @@ import {
   MenuItem,
   Alert,
   Switch,
+  Dialog,
+  AlertDialog,
 } from '@design-system/mui';
 
 const muiComponents: InsendioComponents = {
@@ -50,12 +53,16 @@ const muiComponents: InsendioComponents = {
   MenuItem,
   Alert,
   Switch,
+  Dialog,
+  AlertDialog,
 };
 
 export default function App() {
   return (
-    <InsendioComponentsProvider value={muiComponents}>
-      <InsendioApp />
-    </InsendioComponentsProvider>
+    <DesignSystemThemeProvider>
+      <InsendioComponentsProvider value={muiComponents}>
+        <InsendioApp />
+      </InsendioComponentsProvider>
+    </DesignSystemThemeProvider>
   );
 }

@@ -6,6 +6,7 @@ export interface AccessibilityPreferences {
   largeText: boolean;
   reducedTransparency: boolean;
   focusVisible: boolean;
+  preferChartTable: boolean;
 }
 
 const STORAGE_KEY = 'ds-accessibility';
@@ -16,6 +17,7 @@ const defaults: AccessibilityPreferences = {
   largeText: false,
   reducedTransparency: false,
   focusVisible: false,
+  preferChartTable: false,
 };
 
 const getDefaultPreferences = (): AccessibilityPreferences => {

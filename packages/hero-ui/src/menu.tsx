@@ -1,51 +1,80 @@
+import * as React from 'react';
 import {
-  Menu as BaseMenu,
-  MenuButton as BaseMenuButton,
-  MenuList as BaseMenuList,
-  MenuItem as BaseMenuItem,
-  type MenuProps as BaseMenuProps,
-  type MenuButtonProps as BaseMenuButtonProps,
-  type MenuListProps as BaseMenuListProps,
-  type MenuItemProps as BaseMenuItemProps,
-} from '@design-system/base';
-import { cn } from '@design-system/utils';
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+  Button,
+} from '@heroui/react';
 
-export function Menu(props: BaseMenuProps) {
-  return <BaseMenu className="relative inline-block" {...props} />;
+const MENU_BUTTON = Symbol('MenuButton');
+const MENU_LIST = Symbol('MenuList');
+const MENU_ITEM = Symbol('MenuItem');
+
+function isMenuButton(c: React.ReactNode): c is React.ReactElement<{ children: React.ReactNode }> {
+  return React.isValidElement(c) && (c.type as { _menu?: symbol })?._menu === MENU_BUTTON;
 }
 
-export function MenuButton({ className, ...props }: BaseMenuButtonProps) {
+function isMenuList(c: React.ReactNode): c is React.ReactElement<{ children: React.ReactNode }> {
+  return React.isValidElement(c) && (c.type as { _menu?: symbol })?._menu === MENU_LIST;
+}
+
+function isMenuItem(c: React.ReactNode): c is React.ReactElement<{ children: React.ReactNode; onSelect?: () => void }> {
+  return React.isValidElement(c) && (c.type as { _menu?: symbol })?._menu === MENU_ITEM;
+}
+
+export interface MenuProps extends React.HTMLAttributes<HTMLDivElement> {
+  children: React.ReactNode;
+}
+
+export function Menu({ children, className, ...rest }: MenuProps) {
+  const kids = React.Children.toArray(children);
+  const buttonEl = kids.find(isMenuButton);
+  const listEl = kids.find(isMenuList);
+
+  const buttonContent = buttonEl && React.isValidElement(buttonEl) ? buttonEl.props.children : null;
+  const menuItems = listEl && React.isValidElement(listEl)
+    ? React.Children.toArray(listEl.props.children).filter(isMenuItem)
+    : [];
+
   return (
-    <BaseMenuButton
-      className={cn(
-        'inline-flex h-10 items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500',
-        className
-      )}
-      {...props}
-    />
+    <Dropdown className={className} {...rest}>
+      <DropdownTrigger>
+        <Button variant="bordered">{buttonContent}</Button>
+      </DropdownTrigger>
+      <DropdownMenu aria-label="Menu">
+        {menuItems.map((item, i) => {
+          if (React.isValidElement(item) && isMenuItem(item)) {
+            return (
+              <DropdownItem
+                key={i}
+                onAction={() => item.props.onSelect?.()}
+              >
+                {item.props.children}
+              </DropdownItem>
+            );
+          }
+          return null;
+        })}
+      </DropdownMenu>
+    </Dropdown>
   );
 }
 
-export function MenuList({ className, ...props }: BaseMenuListProps) {
-  return (
-    <BaseMenuList
-      className={cn(
-        'absolute left-0 top-full z-50 mt-1 min-w-[8rem] overflow-hidden rounded-md border border-gray-200 bg-white py-1 shadow-md',
-        className
-      )}
-      {...props}
-    />
-  );
+function MenuButtonImpl({ children }: { children: React.ReactNode }) {
+  return <>{children}</>;
 }
+(MenuButtonImpl as React.FC & { _menu: symbol })._menu = MENU_BUTTON;
+export const MenuButton = MenuButtonImpl;
 
-export function MenuItem({ className, ...props }: BaseMenuItemProps) {
-  return (
-    <BaseMenuItem
-      className={cn(
-        'relative flex cursor-pointer select-none items-center px-2 py-1.5 text-sm outline-none hover:bg-gray-100 focus:bg-gray-100',
-        className
-      )}
-      {...props}
-    />
-  );
+function MenuListImpl({ children }: { children: React.ReactNode }) {
+  return <>{children}</>;
 }
+(MenuListImpl as React.FC & { _menu: symbol })._menu = MENU_LIST;
+export const MenuList = MenuListImpl;
+
+function MenuItemImpl({ children }: { children: React.ReactNode; onSelect?: () => void }) {
+  return <>{children}</>;
+}
+(MenuItemImpl as React.FC & { _menu: symbol })._menu = MENU_ITEM;
+export const MenuItem = MenuItemImpl;

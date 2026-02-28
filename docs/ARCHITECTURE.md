@@ -16,16 +16,19 @@
 │  - Shared app structure (layout, pages, routes)                  │
 │  - Specialized components (InsendioCard, InsendioTab, etc.)      │
 │  - Uses useInsendioComponents() for polymorphic components        │
+│  - Dashboard uses @design-system/charts                         │
 └─────────────────────────────────────────────────────────────────┘
                               │
-                              ▼
-┌─────────────────────────────────────────────────────────────────┐
-│  Styled packages (mui, daisyui, shadcn, hero-ui)                  │
-│  - Wrap base components with styling                              │
-│  - Accept className, merge with cn()                              │
-│  - Export same component API                                     │
-└─────────────────────────────────────────────────────────────────┘
-                              │
+              ┌───────────────┴───────────────┐
+              ▼                               ▼
+┌─────────────────────────────┐   ┌─────────────────────────────────┐
+│  charts                      │   │  Styled packages (mui, daisyui,  │
+│  - Bar, Line, Pie, Area,    │   │  shadcn, hero-ui)                │
+│    NetworkGraph             │   │  - Wrap base components          │
+│  - Uses base, utils, tokens  │   │  - Accept className, merge cn()  │
+└─────────────────────────────┘   └─────────────────────────────────┘
+              │                               │
+              └───────────────┬───────────────┘
                               ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │  base + tokens + utils + typography + icons                       │
@@ -47,7 +50,8 @@
 | `daisyui` | base, tokens, utils |
 | `shadcn` | base, tokens, utils |
 | `hero-ui` | base, tokens, utils |
-| `insendio-app` | base, icons, typography, utils |
+| `insendio-app` | base, icons, typography, utils, charts |
+| `charts` | base, utils |
 | `mui-app` | insendio-app, mui |
 
 ## Component Polymorphism

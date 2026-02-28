@@ -1,5 +1,6 @@
 import React from 'react';
 import type { LibId } from '../context/LibContext';
+import { Text } from '@design-system/typography';
 import * as BaseDS from '@design-system/base';
 import * as ShadcnDS from '@design-system/shadcn';
 import * as HeroDS from '@design-system/hero-ui';
@@ -30,7 +31,7 @@ function getLibModule(lib: LibId) {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section className="mt-10">
-      <h2 className="text-xl font-semibold text-[var(--ds-text-primary)]">{title}</h2>
+      <Text variant="h3" as="h2">{title}</Text>
       <div className="mt-3">{children}</div>
     </section>
   );

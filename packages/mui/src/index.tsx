@@ -1,8 +1,9 @@
 /**
  * @design-system/mui
- * Components styled with Material UI
+ * Components styled with Material UI - uses MUI components with design system theme
  */
 
+export { DesignSystemThemeProvider } from './ThemeProvider';
 export { Badge } from './badge';
 export { Button } from './button';
 export { Accordion, AccordionItem, AccordionHeader, AccordionPanel } from './accordion';

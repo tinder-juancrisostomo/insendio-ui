@@ -1,21 +1,35 @@
-import React from 'react';
-import { Dialog as BaseDialog, type DialogProps as BaseDialogProps } from '@design-system/base';
-import { cn } from '@design-system/utils';
+import * as React from 'react';
+import MuiDialog from '@mui/material/Dialog';
+import type { DialogProps as MuiDialogProps } from '@mui/material/Dialog';
 
-export const Dialog = React.forwardRef<HTMLDivElement, BaseDialogProps>(
-  ({ className, ...props }, ref) => (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
-      <div className="fixed inset-0 bg-black/50" aria-hidden />
-      <BaseDialog
+export interface DialogProps extends Omit<MuiDialogProps, 'open' | 'onClose'> {
+  children: React.ReactNode;
+  open: boolean;
+  onClose: () => void;
+}
+
+export const Dialog = React.forwardRef<HTMLDivElement, DialogProps>(
+  ({ open, onClose, children, ...props }, ref) => {
+    return (
+      <MuiDialog
         ref={ref}
-        className={cn(
-          'relative z-50 w-full max-w-lg rounded-lg border border-gray-200 bg-white p-6 shadow-lg',
-          className
-        )}
+        open={open}
+        onClose={onClose}
+        slotProps={{
+          backdrop: { onClick: onClose },
+        }}
+        PaperProps={{
+          sx: {
+            borderRadius: 2,
+            boxShadow: 3,
+          },
+        }}
         {...props}
-      />
-    </div>
-  )
+      >
+        {children}
+      </MuiDialog>
+    );
+  }
 );
 
 Dialog.displayName = 'Dialog';

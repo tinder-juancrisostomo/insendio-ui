@@ -58,9 +58,31 @@
 
   /* Typography */
   --ds-font-sans: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --ds-font-size-xs: 0.75rem;
   --ds-font-size-sm: 0.875rem;
   --ds-font-size-base: 1rem;
   --ds-font-size-lg: 1.125rem;
+  --ds-font-size-h4: 1.125rem;
+  --ds-font-size-h3: 1.25rem;
+  --ds-font-size-h2: 1.5rem;
+  --ds-font-size-h1: 1.875rem;
+  --ds-line-height-tight: 1.25;
+  --ds-line-height-normal: 1.5;
+  --ds-line-height-relaxed: 1.625;
+  --ds-font-weight-normal: 400;
+  --ds-font-weight-medium: 500;
+  --ds-font-weight-semibold: 600;
+  --ds-font-weight-bold: 700;
+  --ds-letter-spacing-tight: -0.025em;
+  --ds-letter-spacing-wide: 0.05em;
+
+  /* Animation */
+  --ds-duration-instant: 0ms;
+  --ds-duration-fast: 150ms;
+  --ds-duration-normal: 200ms;
+  --ds-duration-slow: 300ms;
+  --ds-ease-out: cubic-bezier(0.33, 1, 0.68, 1);
+  --ds-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 .ds-dark {
@@ -259,4 +281,93 @@
 .ds-focus-visible *:focus-visible {
   outline: 3px solid var(--ds-border-focus);
   outline-offset: 2px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Animation classes                                                           */
+/* Use with @design-system/tokens. Respects prefers-reduced-motion.            */
+/* -------------------------------------------------------------------------- */
+
+@keyframes ds-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes ds-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes ds-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ds-slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.ds-animate-fade-in {
+  animation: ds-fade-in var(--ds-duration-normal) var(--ds-ease-out) forwards;
+}
+
+.ds-animate-scale-in {
+  animation: ds-scale-in var(--ds-duration-normal) var(--ds-ease-out) forwards;
+}
+
+.ds-animate-slide-up {
+  animation: ds-slide-up var(--ds-duration-normal) var(--ds-ease-out) forwards;
+}
+
+.ds-animate-slide-in-left {
+  animation: ds-slide-in-left var(--ds-duration-normal) var(--ds-ease-out) forwards;
+}
+
+/* Stagger delays for sequential animations */
+.ds-animate-delay-0 { animation-delay: 0ms; }
+.ds-animate-delay-1 { animation-delay: 50ms; }
+.ds-animate-delay-2 { animation-delay: 100ms; }
+.ds-animate-delay-3 { animation-delay: 150ms; }
+.ds-animate-delay-4 { animation-delay: 200ms; }
+.ds-animate-delay-5 { animation-delay: 250ms; }
+
+/* Dialog-specific: overlay fade, content scale (used by Dialog/AlertDialog) */
+.ds-dialog-overlay-enter {
+  animation: ds-fade-in var(--ds-duration-fast) var(--ds-ease-out) forwards;
+}
+
+.ds-dialog-content-enter {
+  animation: ds-scale-in var(--ds-duration-normal) var(--ds-ease-out) forwards;
+}
+
+/* prefers-reduced-motion: disable animations */
+@media (prefers-reduced-motion: reduce) {
+  .ds-animate-fade-in,
+  .ds-animate-scale-in,
+  .ds-animate-slide-up,
+  .ds-animate-slide-in-left,
+  .ds-dialog-overlay-enter,
+  .ds-dialog-content-enter {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }

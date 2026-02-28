@@ -1,11 +1,43 @@
-import { SearchIcon, FilterIcon, UsersIcon, ClockIcon, PencilIcon } from '@design-system/icons';
+import { useState } from 'react';
+import { SearchIcon, FilterIcon, UsersIcon, ClockIcon, PencilIcon, XIcon } from '@design-system/icons';
 import { Text } from '@design-system/typography';
-import { segments, segmentStats } from '../mock-data';
+import { segments as initialSegments, segmentStats } from '../mock-data';
 import { useInsendioComponents } from '../components-context';
 import { PageLayout, InsendioCard, InsendioStatCard, InsendioTableToolbar, InsendioList, InsendioListItem } from '../components/insendio';
 
+type Segment = { id: string; name: string; type: string; users: number; lastModified: string };
+
 export function SegmentsPage() {
-  const { Stack, Inline, Input, Button, Badge } = useInsendioComponents();
+  const { Stack, Inline, Input, Button, Badge, Dialog, AlertDialog } = useInsendioComponents();
+  const [segments, setSegments] = useState<Segment[]>(() =>
+    initialSegments.map((s) => ({ id: s.id, name: s.name, type: s.type, users: s.users, lastModified: s.lastModified }))
+  );
+  const [editSegment, setEditSegment] = useState<Segment | null>(null);
+  const [deleteSegment, setDeleteSegment] = useState<Segment | null>(null);
+  const [editForm, setEditForm] = useState({ name: '', type: '', users: 0 });
+
+  const handleEditClick = (seg: Segment) => {
+    setEditSegment(seg);
+    setEditForm({ name: seg.name, type: seg.type, users: seg.users });
+  };
+
+  const handleSaveEdit = () => {
+    if (!editSegment) return;
+    setSegments((prev) =>
+      prev.map((s) =>
+        s.id === editSegment.id
+          ? { ...s, name: editForm.name, type: editForm.type, users: editForm.users, lastModified: 'Just now' }
+          : s
+      )
+    );
+    setEditSegment(null);
+  };
+
+  const handleDeleteConfirm = () => {
+    if (!deleteSegment) return;
+    setSegments((prev) => prev.filter((s) => s.id !== deleteSegment.id));
+    setDeleteSegment(null);
+  };
 
   return (
     <PageLayout title="User segments and audiences">
@@ -67,15 +99,88 @@ export function SegmentsPage() {
                     </span>
                   </Inline>
                 </Stack>
-                <Button variant="outline" size="sm">
-                  <PencilIcon size={16} />
-                  Edit
-                </Button>
+                <Inline gap={2}>
+                  <Button variant="outline" size="sm" onClick={() => handleEditClick(seg)}>
+                    <PencilIcon size={16} />
+                    Edit
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="text-[var(--ds-text-primary)] hover:bg-[var(--ds-bg-error)] hover:border-[var(--ds-bg-error)]"
+                    onClick={() => setDeleteSegment(seg)}
+                  >
+                    <XIcon size={16} />
+                    Delete
+                  </Button>
+                </Inline>
               </InsendioCard>
             </InsendioListItem>
           ))}
         </InsendioList>
       </Stack>
+
+      <Dialog open={!!editSegment} onClose={() => setEditSegment(null)} aria-labelledby="edit-segment-title">
+        <Stack gap={4} className="p-6">
+          <Text id="edit-segment-title" variant="h3" className="text-[var(--ds-text-primary)]">
+            Edit Segment
+          </Text>
+          <Stack gap={3}>
+            <Stack gap={1}>
+              <Text variant="caption" className="text-[var(--ds-text-secondary)]">Name</Text>
+              <Input
+                value={editForm.name}
+                onChange={(e) => setEditForm((f) => ({ ...f, name: e.target.value }))}
+                placeholder="Segment name"
+                className="rounded-lg border border-[var(--ds-border-default)] bg-[var(--ds-bg-input)]"
+              />
+            </Stack>
+            <Stack gap={1}>
+              <Text variant="caption" className="text-[var(--ds-text-secondary)]">Type</Text>
+              <Input
+                value={editForm.type}
+                onChange={(e) => setEditForm((f) => ({ ...f, type: e.target.value }))}
+                placeholder="e.g. Behavioral, Subscription"
+                className="rounded-lg border border-[var(--ds-border-default)] bg-[var(--ds-bg-input)]"
+              />
+            </Stack>
+            <Stack gap={1}>
+              <Text variant="caption" className="text-[var(--ds-text-secondary)]">Users</Text>
+              <Input
+                type="number"
+                value={editForm.users || ''}
+                onChange={(e) => setEditForm((f) => ({ ...f, users: Number.parseInt(e.target.value, 10) || 0 }))}
+                placeholder="Number of users"
+                className="rounded-lg border border-[var(--ds-border-default)] bg-[var(--ds-bg-input)]"
+              />
+            </Stack>
+          </Stack>
+          <Inline gap={2} justify="flex-end">
+            <Button variant="outline" onClick={() => setEditSegment(null)}>Cancel</Button>
+            <Button variant="default" onClick={handleSaveEdit}>Save</Button>
+          </Inline>
+        </Stack>
+      </Dialog>
+
+      <AlertDialog open={!!deleteSegment} onClose={() => setDeleteSegment(null)}>
+        <Stack gap={4} className="p-6">
+          <Text id="delete-segment-title" variant="h3" className="text-[var(--ds-text-primary)]">
+            Delete Segment
+          </Text>
+          <Text id="delete-segment-desc" variant="body" className="text-[var(--ds-text-secondary)]">
+            Are you sure you want to delete &quot;{deleteSegment?.name}&quot;? This action cannot be undone.
+          </Text>
+          <Inline gap={2} justify="flex-end">
+            <Button variant="outline" onClick={() => setDeleteSegment(null)}>Cancel</Button>
+            <Button
+              variant="destructive"
+              onClick={handleDeleteConfirm}
+            >
+              Delete
+            </Button>
+          </Inline>
+        </Stack>
+      </AlertDialog>
     </PageLayout>
   );
 }

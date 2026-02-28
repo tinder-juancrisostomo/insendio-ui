@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "@design-system/base": "workspace:*",
+    "@design-system/charts": "workspace:*",
     "@design-system/icons": "workspace:*",
     "@design-system/typography": "workspace:*",
     "@design-system/utils": "workspace:*"

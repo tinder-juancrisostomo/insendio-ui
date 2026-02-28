@@ -10,8 +10,9 @@ import {
 } from '@design-system/base';
 import { cn } from '@design-system/utils';
 
-export function Accordion({ className, ...props }: BaseAccordionProps) {
-  return <BaseAccordion className={cn('divide-y divide-gray-200', className)} {...props} />;
+
+export function Accordion(props: BaseAccordionProps) {
+  return <BaseAccordion className="w-full" {...props} />;
 }
 
 export function AccordionItem({ className, ...props }: BaseAccordionItemProps) {
@@ -22,7 +23,7 @@ export function AccordionHeader({ className, ...props }: BaseAccordionHeaderProp
   return (
     <BaseAccordionHeader
       className={cn(
-        'flex w-full items-center justify-between py-2 text-left font-medium hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500',
+        'flex w-full cursor-pointer items-center justify-between rounded-md px-3 py-2 text-left text-sm font-medium transition-colors hover:bg-[var(--ds-bg-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ds-border-focus)]',
         className
       )}
       {...props}

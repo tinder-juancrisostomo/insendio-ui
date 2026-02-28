@@ -1,21 +1,33 @@
-import React from 'react';
-import { Dialog as BaseDialog, type DialogProps as BaseDialogProps } from '@design-system/base';
-import { cn } from '@design-system/utils';
+import * as React from 'react';
+import { Modal, ModalContent, ModalBody } from '@heroui/react';
 
-export const Dialog = React.forwardRef<HTMLDivElement, BaseDialogProps>(
-  ({ className, ...props }, ref) => (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
-      <div className="fixed inset-0 bg-black/50" aria-hidden />
-      <BaseDialog
+export interface DialogProps {
+  children: React.ReactNode;
+  open: boolean;
+  onClose: () => void;
+  className?: string;
+  'aria-labelledby'?: string;
+  'aria-label'?: string;
+}
+
+export const Dialog = React.forwardRef<HTMLDivElement, DialogProps>(
+  ({ open, onClose, children, className, ...props }, ref) => {
+    return (
+      <Modal
         ref={ref}
-        className={cn(
-          'relative z-50 w-full max-w-lg rounded-lg border border-gray-200 bg-white p-6 shadow-lg',
-          className
-        )}
+        isOpen={open}
+        onClose={onClose}
+        classNames={{
+          base: className,
+        }}
         {...props}
-      />
-    </div>
-  )
+      >
+        <ModalContent>
+          <ModalBody>{children}</ModalBody>
+        </ModalContent>
+      </Modal>
+    );
+  }
 );
 
 Dialog.displayName = 'Dialog';

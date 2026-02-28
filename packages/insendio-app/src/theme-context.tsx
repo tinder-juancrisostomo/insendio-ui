@@ -35,13 +35,21 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const mq = window.matchMedia('(prefers-color-scheme: dark)');
     const handleChange = () => setSystemTheme(getSystemTheme());
     mq.addEventListener('change', handleChange);
-    return () => mq.removeEventListener('change', handleChange);
+    const handleVisibility = () => {
+      if (document.visibilityState === 'visible') setSystemTheme(getSystemTheme());
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
+    return () => {
+      mq.removeEventListener('change', handleChange);
+      document.removeEventListener('visibilitychange', handleVisibility);
+    };
   }, []);
 
   useEffect(() => {
     document.documentElement.classList.remove('ds-light', 'ds-dark');
     document.documentElement.classList.add(`ds-${theme}`);
     document.documentElement.classList.toggle('dark', theme === 'dark');
+    document.documentElement.style.colorScheme = theme;
     localStorage.setItem('ds-theme', preference);
   }, [theme, preference]);
 

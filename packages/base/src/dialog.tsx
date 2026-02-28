@@ -1,9 +1,20 @@
 /**
  * Dialog (Modal) - W3C ARIA APG Pattern
  * @see https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
+ *
+ * A11y: focus trap, Escape to close, focus first focusable on open, return focus to trigger on close.
+ * Click-outside-to-close is handled by the themed wrappers (backdrop onClick).
  */
 
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useRef } from 'react';
+
+function getFocusableElements(root: HTMLElement): HTMLElement[] {
+  return Array.from(
+    root.querySelectorAll<HTMLElement>(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    )
+  ).filter((el) => !el.hasAttribute('disabled') && el.getAttribute('aria-hidden') !== 'true');
+}
 
 export interface DialogProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -17,6 +28,17 @@ export interface DialogProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export const Dialog = React.forwardRef<HTMLDivElement, DialogProps>(
   ({ children, open, onClose, ...props }, ref) => {
+    const rootRef = useRef<HTMLDivElement>(null);
+
+    const setRefs = useCallback(
+      (el: HTMLDivElement | null) => {
+        (rootRef as React.MutableRefObject<HTMLDivElement | null>).current = el;
+        if (typeof ref === 'function') ref(el);
+        else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = el;
+      },
+      [ref]
+    );
+
     const handleKeyDown = useCallback(
       (e: React.KeyboardEvent) => {
         if (e.key === 'Escape') {
@@ -27,11 +49,7 @@ export const Dialog = React.forwardRef<HTMLDivElement, DialogProps>(
 
         if (e.key === 'Tab') {
           const root = e.currentTarget as HTMLElement;
-          const focusable = Array.from(
-            root.querySelectorAll<HTMLElement>(
-              'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-            )
-          ).filter((el) => !el.hasAttribute('disabled') && el.getAttribute('aria-hidden') !== 'true');
+          const focusable = getFocusableElements(root);
 
           if (focusable.length === 0) {
             e.preventDefault();
@@ -59,11 +77,12 @@ export const Dialog = React.forwardRef<HTMLDivElement, DialogProps>(
 
     useEffect(() => {
       if (!open) return;
-      const prev = document.activeElement as HTMLElement;
-      const focusable = document.querySelector<HTMLElement>(
-        '[role="dialog"] button, [role="dialog"] [href], [role="dialog"] input, [role="dialog"] select, [role="dialog"] textarea, [role="dialog"] [tabindex]:not([tabindex="-1"])'
-      );
-      focusable?.focus();
+      const prev = document.activeElement as HTMLElement | null;
+      const root = rootRef.current;
+      if (root) {
+        const focusable = getFocusableElements(root);
+        (focusable[0] ?? root).focus();
+      }
       return () => prev?.focus();
     }, [open]);
 
@@ -71,9 +90,10 @@ export const Dialog = React.forwardRef<HTMLDivElement, DialogProps>(
 
     return (
       <div
-        ref={ref}
+        ref={setRefs}
         role="dialog"
         aria-modal="true"
+        tabIndex={-1}
         onKeyDown={handleKeyDown}
         {...props}
       >

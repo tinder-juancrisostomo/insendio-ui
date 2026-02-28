@@ -15,15 +15,15 @@ export interface TextProps extends TypographyProps {
   variant?: TextVariant;
 }
 
-const variantStyles: Record<TextVariant, string> = {
-  h1: 'text-3xl font-bold tracking-tight text-[var(--ds-text-primary)]',
-  h2: 'text-2xl font-semibold tracking-tight text-[var(--ds-text-primary)]',
-  h3: 'text-xl font-semibold text-[var(--ds-text-primary)]',
-  h4: 'text-lg font-medium text-[var(--ds-text-primary)]',
-  body: 'text-base font-normal text-[var(--ds-text-primary)] leading-normal',
-  'body-sm': 'text-sm font-normal text-[var(--ds-text-secondary)] leading-normal',
-  caption: 'text-xs font-normal text-[var(--ds-text-muted)]',
-  overline: 'text-xs font-medium uppercase tracking-wider text-[var(--ds-text-secondary)]',
+const variantClasses: Record<TextVariant, string> = {
+  h1: 'ds-text-h1',
+  h2: 'ds-text-h2',
+  h3: 'ds-text-h3',
+  h4: 'ds-text-h4',
+  body: 'ds-text-body',
+  'body-sm': 'ds-text-body-sm',
+  caption: 'ds-text-caption',
+  overline: 'ds-text-overline',
 };
 
 const defaultTag: Record<TextVariant, keyof JSX.IntrinsicElements> = {
@@ -40,9 +40,9 @@ const defaultTag: Record<TextVariant, keyof JSX.IntrinsicElements> = {
 export const Text = React.forwardRef<HTMLElement, TextProps>(
   ({ variant = 'body', as, className = '', children, ...props }, ref) => {
     const Tag = (as ?? defaultTag[variant]) as 'h1' | 'h2' | 'h3' | 'h4' | 'p' | 'span';
-    const styles = variantStyles[variant];
+    const variantClass = variantClasses[variant];
     return (
-      <Tag ref={ref as React.Ref<HTMLHeadingElement>} className={`${styles} ${className}`.trim()} {...(props as any)}>
+      <Tag ref={ref as React.Ref<HTMLHeadingElement>} className={`${variantClass} ${className}`.trim()} {...(props as any)}>
         {children}
       </Tag>
     );

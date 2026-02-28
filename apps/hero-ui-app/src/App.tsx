@@ -25,6 +25,8 @@ import {
   MenuItem,
   Alert,
   Switch,
+  Dialog,
+  AlertDialog,
 } from '@design-system/hero-ui';
 
 const heroUiComponents: InsendioComponents = {
@@ -50,6 +52,8 @@ const heroUiComponents: InsendioComponents = {
   MenuItem,
   Alert,
   Switch,
+  Dialog,
+  AlertDialog,
 };
 
 export default function App() {

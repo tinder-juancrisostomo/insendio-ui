@@ -1,25 +1,42 @@
-import React from 'react';
-import { AlertDialog as BaseAlertDialog, type AlertDialogProps as BaseAlertDialogProps } from '@design-system/base';
-import { cn } from '@design-system/utils';
+import * as React from 'react';
+import MuiDialog from '@mui/material/Dialog';
+import type { DialogProps as MuiDialogProps } from '@mui/material/Dialog';
 
-export const AlertDialog = React.forwardRef<HTMLDivElement, BaseAlertDialogProps>(
-  ({ className, children, open, onClose, ...rest }, ref) => (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
-      <div className="fixed inset-0 bg-black/50" aria-hidden />
-      <BaseAlertDialog
+export interface AlertDialogProps extends Omit<MuiDialogProps, 'open' | 'onClose'> {
+  children: React.ReactNode;
+  open: boolean;
+  onClose: () => void;
+}
+
+export const AlertDialog = React.forwardRef<HTMLDivElement, AlertDialogProps>(
+  ({ open, onClose, children, ...props }, ref) => {
+    const handleClose = React.useCallback(
+      (_: object, reason: string) => {
+        if (reason !== 'backdropClick') onClose();
+      },
+      [onClose]
+    );
+    return (
+      <MuiDialog
         ref={ref}
         open={open}
-        onClose={onClose}
-        className={cn(
-          'relative z-50 w-full max-w-md rounded-lg border border-gray-200 bg-white p-6 shadow-lg',
-          className
-        )}
-        {...rest}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        PaperProps={{
+          sx: {
+            borderRadius: 2,
+            boxShadow: 3,
+            minWidth: 320,
+            maxWidth: 448,
+          },
+        }}
+        {...props}
       >
         {children}
-      </BaseAlertDialog>
-    </div>
-  )
+      </MuiDialog>
+    );
+  }
 );
 
 AlertDialog.displayName = 'AlertDialog';

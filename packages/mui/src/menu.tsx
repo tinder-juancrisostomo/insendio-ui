@@ -1,51 +1,108 @@
-import {
-  Menu as BaseMenu,
-  MenuButton as BaseMenuButton,
-  MenuList as BaseMenuList,
-  MenuItem as BaseMenuItem,
-  type MenuProps as BaseMenuProps,
-  type MenuButtonProps as BaseMenuButtonProps,
-  type MenuListProps as BaseMenuListProps,
-  type MenuItemProps as BaseMenuItemProps,
-} from '@design-system/base';
-import { cn } from '@design-system/utils';
+import * as React from 'react';
+import MuiMenu from '@mui/material/Menu';
+import MuiMenuItem from '@mui/material/MenuItem';
+import MuiButton from '@mui/material/Button';
 
-export function Menu(props: BaseMenuProps) {
-  return <BaseMenu className="relative inline-block" {...props} />;
+interface MenuContextValue {
+  anchorEl: HTMLElement | null;
+  setAnchorEl: (el: HTMLElement | null) => void;
+  open: boolean;
+  close: () => void;
 }
 
-export function MenuButton({ className, ...props }: BaseMenuButtonProps) {
+const MenuContext = React.createContext<MenuContextValue | null>(null);
+
+export interface MenuProps extends React.HTMLAttributes<HTMLDivElement> {
+  children: React.ReactNode;
+}
+
+export function Menu({ children, className, ...rest }: MenuProps) {
+  const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
+  const open = Boolean(anchorEl);
+  const close = React.useCallback(() => setAnchorEl(null), []);
+
   return (
-    <BaseMenuButton
-      className={cn(
-        'inline-flex h-10 items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500',
-        className
-      )}
-      {...props}
-    />
+    <MenuContext.Provider value={{ anchorEl, setAnchorEl, open, close }}>
+      <div className={className} {...rest}>
+        {children}
+      </div>
+    </MenuContext.Provider>
   );
 }
 
-export function MenuList({ className, ...props }: BaseMenuListProps) {
+export interface MenuButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  children: React.ReactNode;
+}
+
+export function MenuButton({ children, onClick, disabled, className }: MenuButtonProps) {
+  const ctx = React.useContext(MenuContext);
+  if (!ctx) throw new Error('MenuButton must be inside Menu');
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    ctx.setAnchorEl(e.currentTarget);
+    onClick?.(e);
+  };
+
   return (
-    <BaseMenuList
-      className={cn(
-        'absolute left-0 top-full z-50 mt-1 min-w-[8rem] overflow-hidden rounded-md border border-gray-200 bg-white py-1 shadow-md',
-        className
-      )}
-      {...props}
-    />
+    <MuiButton
+      id="menu-button"
+      aria-controls={ctx.open ? 'menu' : undefined}
+      aria-haspopup="true"
+      aria-expanded={ctx.open ? 'true' : undefined}
+      onClick={handleClick}
+      variant="outlined"
+      disabled={disabled}
+      className={className}
+    >
+      {children}
+    </MuiButton>
   );
 }
 
-export function MenuItem({ className, ...props }: BaseMenuItemProps) {
+export interface MenuListProps extends React.HTMLAttributes<HTMLUListElement> {
+  children: React.ReactNode;
+}
+
+export function MenuList({ children, ...props }: MenuListProps) {
+  const ctx = React.useContext(MenuContext);
+  if (!ctx) throw new Error('MenuList must be inside Menu');
+
   return (
-    <BaseMenuItem
-      className={cn(
-        'relative flex cursor-pointer select-none items-center px-2 py-1.5 text-sm outline-none hover:bg-gray-100 focus:bg-gray-100',
-        className
-      )}
-      {...props}
-    />
+    <MuiMenu
+      id="menu"
+      anchorEl={ctx.anchorEl}
+      open={ctx.open}
+      onClose={ctx.close}
+      MenuListProps={{
+        'aria-labelledby': 'menu-button',
+        ...props,
+      }}
+      anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+      transformOrigin={{ vertical: 'top', horizontal: 'left' }}
+    >
+      {children}
+    </MuiMenu>
+  );
+}
+
+export interface MenuItemProps extends React.HTMLAttributes<HTMLLIElement> {
+  children: React.ReactNode;
+  onSelect?: () => void;
+}
+
+export function MenuItem({ children, onSelect, onClick, ...props }: MenuItemProps) {
+  const ctx = React.useContext(MenuContext);
+  if (!ctx) throw new Error('MenuItem must be inside Menu');
+
+  const handleClick = (e: React.MouseEvent<HTMLLIElement>) => {
+    onSelect?.();
+    ctx.close();
+    onClick?.(e);
+  };
+
+  return (
+    <MuiMenuItem onClick={handleClick} {...props}>
+      {children}
+    </MuiMenuItem>
   );
 }

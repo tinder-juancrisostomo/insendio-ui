@@ -1,6 +1,6 @@
-import React from 'react';
-import { Button as BaseButton, type ButtonProps as BaseButtonProps } from '@design-system/base';
-import { cn } from '@design-system/utils';
+import * as React from 'react';
+import { Button as HeroButton } from '@heroui/react';
+import type { ButtonProps as HeroButtonProps } from '@heroui/react';
 
 export type ButtonVariant =
   | 'default'
@@ -12,35 +12,52 @@ export type ButtonVariant =
 
 export type ButtonSize = 'default' | 'sm' | 'lg' | 'icon';
 
-export interface ButtonProps extends BaseButtonProps {
+export interface ButtonProps extends Omit<HeroButtonProps, 'variant' | 'color' | 'size'> {
   variant?: ButtonVariant;
   size?: ButtonSize;
 }
 
-const variantClass: Record<ButtonVariant, string> = {
-  default: 'ds-btn ds-btn--primary',
-  secondary: 'ds-btn ds-btn--secondary',
-  outline: 'ds-btn ds-btn--outline',
-  destructive: 'ds-btn ds-btn--destructive',
-  ghost: 'ds-btn ds-btn--ghost',
-  link: 'ds-btn ds-btn--link',
+const variantMap: Record<ButtonVariant, HeroButtonProps['variant']> = {
+  default: 'solid',
+  secondary: 'flat',
+  outline: 'bordered',
+  destructive: 'solid',
+  ghost: 'ghost',
+  link: 'light',
 };
 
-const sizeClass: Record<ButtonSize, string> = {
-  default: '',
-  sm: 'ds-btn--sm',
-  lg: 'ds-btn--lg',
-  icon: 'ds-btn--icon',
+const colorMap: Record<ButtonVariant, HeroButtonProps['color']> = {
+  default: 'primary',
+  secondary: 'default',
+  outline: 'primary',
+  destructive: 'danger',
+  ghost: 'default',
+  link: 'primary',
+};
+
+const sizeMap: Record<ButtonSize, HeroButtonProps['size']> = {
+  default: 'md',
+  sm: 'sm',
+  lg: 'lg',
+  icon: 'md',
 };
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = 'default', size = 'default', ...props }, ref) => (
-    <BaseButton
-      ref={ref}
-      className={cn(variantClass[variant], sizeClass[size], className)}
-      {...props}
-    />
-  )
+  ({ variant = 'default', size = 'default', children, ...props }, ref) => {
+    const isIconOnly = size === 'icon';
+    return (
+      <HeroButton
+        ref={ref}
+        variant={variantMap[variant]}
+        color={colorMap[variant]}
+        size={sizeMap[size]}
+        isIconOnly={isIconOnly}
+        {...props}
+      >
+        {children}
+      </HeroButton>
+    );
+  }
 );
 
 Button.displayName = 'Button';

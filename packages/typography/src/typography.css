@@ -1,0 +1,72 @@
+/**
+ * Design System Typography
+ * Uses design tokens - import @design-system/tokens/css before this file
+ */
+
+.ds-text-h1 {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-font-size-h1);
+  font-weight: var(--ds-font-weight-bold);
+  line-height: var(--ds-line-height-tight);
+  letter-spacing: var(--ds-letter-spacing-tight);
+  color: var(--ds-text-primary);
+}
+
+.ds-text-h2 {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-font-size-h2);
+  font-weight: var(--ds-font-weight-semibold);
+  line-height: var(--ds-line-height-tight);
+  letter-spacing: var(--ds-letter-spacing-tight);
+  color: var(--ds-text-primary);
+}
+
+.ds-text-h3 {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-font-size-h3);
+  font-weight: var(--ds-font-weight-semibold);
+  line-height: var(--ds-line-height-normal);
+  color: var(--ds-text-primary);
+}
+
+.ds-text-h4 {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-font-size-h4);
+  font-weight: var(--ds-font-weight-medium);
+  line-height: var(--ds-line-height-normal);
+  color: var(--ds-text-primary);
+}
+
+.ds-text-body {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-font-size-base);
+  font-weight: var(--ds-font-weight-normal);
+  line-height: var(--ds-line-height-normal);
+  color: var(--ds-text-primary);
+}
+
+.ds-text-body-sm {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-font-size-sm);
+  font-weight: var(--ds-font-weight-normal);
+  line-height: var(--ds-line-height-normal);
+  color: var(--ds-text-secondary);
+}
+
+.ds-text-caption {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-font-size-xs);
+  font-weight: var(--ds-font-weight-normal);
+  line-height: var(--ds-line-height-normal);
+  color: var(--ds-text-muted);
+}
+
+.ds-text-overline {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-font-size-xs);
+  font-weight: var(--ds-font-weight-medium);
+  line-height: var(--ds-line-height-normal);
+  letter-spacing: var(--ds-letter-spacing-wide);
+  text-transform: uppercase;
+  color: var(--ds-text-secondary);
+}

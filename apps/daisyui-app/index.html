@@ -3,6 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function(){
+        var s=localStorage.getItem('ds-theme');
+        var t=(s==='light'||s==='dark')?s:(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+        document.documentElement.classList.add('ds-'+t);
+        if(t==='dark')document.documentElement.classList.add('dark');
+        document.documentElement.style.colorScheme=t;
+      })();
+    </script>
     <title>Insendio - DaisyUI</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

@@ -10,12 +10,13 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.js",
       "types": "./dist/index.d.ts"
-    }
+    },
+    "./css": "./dist/typography.css"
   },
   "sideEffects": false,
   "files": ["dist"],
   "scripts": {
-    "build": "tsup src/index.tsx --format cjs,esm --dts --external react",
+    "build": "tsup src/index.tsx --format cjs,esm --dts --external react && node -e \"require('fs').copyFileSync('src/typography.css','dist/typography.css')\"",
     "lint": "eslint src/"
   },
   "peerDependencies": {

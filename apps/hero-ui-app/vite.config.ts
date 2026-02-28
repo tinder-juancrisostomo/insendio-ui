@@ -7,6 +7,7 @@ import { watchInsendioPlugin } from '@design-system/insendio-app/vite-watch-plug
 
 export default defineConfig({
   plugins: [react(), watchInsendioPlugin() as Plugin],
+  define: { global: 'globalThis' },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
@@ -17,6 +18,10 @@ export default defineConfig({
       '@design-system/tokens/css': path.resolve(
         path.dirname(fileURLToPath(import.meta.url)),
         '../../packages/tokens/src/tokens.css'
+      ),
+      '@design-system/typography/css': path.resolve(
+        path.dirname(fileURLToPath(import.meta.url)),
+        '../../packages/typography/src/typography.css'
       ),
     },
   },

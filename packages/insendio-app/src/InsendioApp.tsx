@@ -11,6 +11,7 @@ const MonitoringPage = lazy(() => import('./pages/MonitoringPage').then((m) => (
 const DataPage = lazy(() => import('./pages/DataPage').then((m) => ({ default: m.DataPage })));
 const RolesPage = lazy(() => import('./pages/RolesPage').then((m) => ({ default: m.RolesPage })));
 const AccessibilityPage = lazy(() => import('./pages/AccessibilityPage').then((m) => ({ default: m.AccessibilityPage })));
+const DashboardPage = lazy(() => import('./pages/DashboardPage').then((m) => ({ default: m.DashboardPage })));
 
 export function InsendioApp() {
   return (
@@ -26,6 +27,7 @@ export function InsendioApp() {
               <Route path="data" element={<DataPage />} />
               <Route path="roles" element={<RolesPage />} />
               <Route path="accessibility" element={<AccessibilityPage />} />
+              <Route path="dashboard" element={<DashboardPage />} />
             </Route>
           </Routes>
         </Suspense>

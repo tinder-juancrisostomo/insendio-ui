@@ -10,6 +10,7 @@ Each app (mui-app, daisyui-app, etc.) has its own Tailwind config. The `content`
 - The chosen design system package (mui, daisyui, etc.)
 - insendio-app
 - typography package
+- charts package (for apps using insendio-app, which includes the Dashboard with charts)
 
 ```js
 // apps/mui-app/tailwind.config.js
@@ -18,6 +19,7 @@ content: [
   '../../packages/mui/src/**/*.{js,ts,jsx,tsx}',
   '../../packages/typography/src/**/*.{js,ts,jsx,tsx}',
   '../../packages/insendio-app/src/**/*.{js,ts,jsx,tsx}',
+  '../../packages/charts/src/**/*.{js,ts,jsx,tsx}',
 ],
 ```
 

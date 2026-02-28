@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { Text } from '@design-system/typography';
 import { useLib } from '../context/LibContext';
 
 const COMPONENTS = [
@@ -49,20 +50,20 @@ export function HomePage() {
   return (
     <div className="mx-auto max-w-4xl">
       <section className="mb-12">
-        <h1 className="text-3xl font-bold text-[var(--ds-text-primary)] mb-2">
+        <Text variant="h1" as="h1" className="mb-2">
           Design System Component Library
-        </h1>
-        <p className="text-[var(--ds-text-secondary)] text-lg">
+        </Text>
+        <Text variant="body" className="text-[var(--ds-text-secondary)] text-lg">
           Accessible UI components following W3C ARIA APG patterns. Switch libraries above to see
           the same components styled with Shadcn UI, HeroUI, DaisyUI, or Material UI.
-        </p>
+        </Text>
       </section>
 
       <section>
-        <h2 className="text-xl font-semibold mb-4">Components</h2>
-        <p className="text-[var(--ds-text-secondary)] mb-6">
+        <Text variant="h3" as="h2" className="mb-4">Components</Text>
+        <Text variant="body-sm" className="mb-6">
           Currently viewing: <strong>{lib}</strong>
-        </p>
+        </Text>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
           {COMPONENTS.map((name) => (
             <Link
@@ -77,10 +78,10 @@ export function HomePage() {
       </section>
 
       <section className="mt-10">
-        <h2 className="text-xl font-semibold mb-4">Layout</h2>
-        <p className="text-[var(--ds-text-secondary)] mb-6">
+        <Text variant="h3" as="h2" className="mb-4">Layout</Text>
+        <Text variant="body-sm" className="mb-6">
           Layout primitives for spacing, alignment, and responsive structure.
-        </p>
+        </Text>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
           {LAYOUT.map((name) => (
             <Link
@@ -95,10 +96,70 @@ export function HomePage() {
       </section>
 
       <section className="mt-10">
-        <h2 className="text-xl font-semibold mb-4">Landmarks</h2>
-        <p className="text-[var(--ds-text-secondary)] mb-6">
+        <Text variant="h3" as="h2" className="mb-4">Typography</Text>
+        <Text variant="body-sm" className="mb-6">
+          Text component with design-token–driven variants (h1–h4, body, body-sm, caption, overline).
+        </Text>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+          <Link
+            to="/typography/h1"
+            className="block p-4 rounded-lg border border-[var(--ds-border-default)] bg-[var(--ds-bg-surface)] hover:border-[var(--ds-border-focus)] transition-colors"
+          >
+            Typography
+          </Link>
+        </div>
+      </section>
+
+      <section className="mt-10">
+        <Text variant="h3" as="h2" className="mb-4">Icons</Text>
+        <Text variant="body-sm" className="mb-6">
+          SVG icon components with configurable size and styling.
+        </Text>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+          <Link
+            to="/icons"
+            className="block p-4 rounded-lg border border-[var(--ds-border-default)] bg-[var(--ds-bg-surface)] hover:border-[var(--ds-border-focus)] transition-colors"
+          >
+            Icons
+          </Link>
+        </div>
+      </section>
+
+      <section className="mt-10">
+        <Text variant="h3" as="h2" className="mb-4">Animations</Text>
+        <Text variant="body-sm" className="mb-6">
+          CSS animation utilities (fade, scale, slide) for dialogs, stats, cards, and more. Respects prefers-reduced-motion.
+        </Text>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+          <Link
+            to="/animations"
+            className="block p-4 rounded-lg border border-[var(--ds-border-default)] bg-[var(--ds-bg-surface)] hover:border-[var(--ds-border-focus)] transition-colors"
+          >
+            Animations
+          </Link>
+        </div>
+      </section>
+
+      <section className="mt-10">
+        <Text variant="h3" as="h2" className="mb-4">Charts</Text>
+        <Text variant="body-sm" className="mb-6">
+          Sample charts and visualizations styled with design tokens (bar, line, pie, area, network).
+        </Text>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+          <Link
+            to="/charts/bar"
+            className="block p-4 rounded-lg border border-[var(--ds-border-default)] bg-[var(--ds-bg-surface)] hover:border-[var(--ds-border-focus)] transition-colors"
+          >
+            Charts &amp; Visualizations
+          </Link>
+        </div>
+      </section>
+
+      <section className="mt-10">
+        <Text variant="h3" as="h2" className="mb-4">Landmarks</Text>
+        <Text variant="body-sm" className="mb-6">
           Semantic page regions (banner, navigation, main, etc.) for accessible structure.
-        </p>
+        </Text>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
           {LANDMARKS.map((name) => (
             <Link

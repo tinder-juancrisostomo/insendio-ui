@@ -7,6 +7,7 @@ export default {
     '../../packages/shadcn/src/**/*.{js,ts,jsx,tsx}',
     '../../packages/typography/src/**/*.{js,ts,jsx,tsx}',
     '../../packages/insendio-app/src/**/*.{js,ts,jsx,tsx}',
+    '../../packages/charts/src/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     extend: {},

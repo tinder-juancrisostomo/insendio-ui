@@ -23,6 +23,8 @@ export interface InsendioComponents {
   Box: React.ComponentType<any>;
   Stack: React.ComponentType<any>;
   Button: React.ComponentType<any>;
+  Dialog: React.ComponentType<any>;
+  AlertDialog: React.ComponentType<any>;
   // ... all primitives
 }
 
@@ -66,6 +68,8 @@ Specialization is a React composition pattern: a **specialized** component wraps
 | `InsendioTableToolbar` | Box | Table toolbar (filters, actions) |
 | `InsendioList` / `InsendioListItem` | Box | List layout components |
 | `InsendioRateLimitCard` | Box | Rate limit display card |
+
+Charts (from `@design-system/charts`) are used on the **Dashboard** page (`/dashboard`) for Bar, Line, Pie, Area, and Network graph visualizations.
 
 ### Example: InsendioCard
 
@@ -120,11 +124,30 @@ insendio-app/
 │   │       └── ...
 │   └── pages/
 │       ├── HomePage.tsx
+│       ├── NotificationsPage.tsx
+│       ├── SegmentsPage.tsx
+│       ├── MonitoringPage.tsx
 │       ├── DataPage.tsx
-│       ├── RolesPage.tsx
+│       ├── RolesPage.tsx      # Settings: Team Members, Manage Roles
 │       ├── AccessibilityPage.tsx
+│       ├── DashboardPage.tsx
 │       └── ...
 ```
+
+## Pages & Routes
+
+| Route | Page | Description |
+|-------|------|-------------|
+| `/` | HomePage | AI assistant, suggested actions, recent campaigns |
+| `/notifications` | NotificationsPage | Notification management |
+| `/segments` | SegmentsPage | User segments with edit/delete dialogs |
+| `/monitoring` | MonitoringPage | Campaign monitoring |
+| `/data` | DataPage | User attributes, deeplinks |
+| `/roles` | RolesPage | Settings: Team Members tab (edit/delete), Manage Roles (permissions matrix) |
+| `/accessibility` | AccessibilityPage | Accessibility preferences (reduce motion, high contrast, etc.) |
+| `/dashboard` | DashboardPage | Analytics: Overview, User Behavior, Performance, Flows tabs with charts |
+
+**Dialogs:** Segments and Team Members use `Dialog` for edit forms and `AlertDialog` for delete confirmation.
 
 ## Library Title
 

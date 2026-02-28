@@ -1,27 +1,31 @@
-import React from 'react';
-import { Switch as BaseSwitch, type SwitchProps as BaseSwitchProps } from '@design-system/base';
-import { cn } from '@design-system/utils';
+import * as React from 'react';
+import { Switch as HeroSwitch } from '@heroui/react';
+import type { SwitchProps as HeroSwitchProps } from '@heroui/react';
 
-const thumb = (
-  <span
-    className="pointer-events-none block h-5 w-5 shrink-0 rounded-full bg-white shadow ring-0 transition-transform translate-x-0.5 group-aria-[checked=true]:translate-x-5"
-    aria-hidden
-  />
-);
+export interface SwitchProps extends Omit<HeroSwitchProps, 'onChange' | 'isSelected'> {
+  checked?: boolean;
+  onCheckedChange?: (checked: boolean) => void;
+  label?: React.ReactNode;
+}
 
-export const Switch = React.forwardRef<HTMLButtonElement, BaseSwitchProps>(
-  ({ className, ...props }, ref) => (
-    <BaseSwitch
-      ref={ref}
-      className={cn(
-        'group relative inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent bg-gray-200 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ds-border-focus)] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 aria-checked:bg-[var(--ds-text-link)]',
-        className
-      )}
-      {...props}
-    >
-      {thumb}
-    </BaseSwitch>
-  )
+export const Switch = React.forwardRef<React.ComponentRef<typeof HeroSwitch>, SwitchProps>(
+  ({ checked = false, onCheckedChange, ...props }, ref) => {
+    const handleChange = React.useCallback(
+      (value: boolean) => {
+        onCheckedChange?.(value);
+      },
+      [onCheckedChange]
+    );
+
+    return (
+      <HeroSwitch
+        ref={ref}
+        isSelected={checked}
+        onValueChange={handleChange}
+        {...props}
+      />
+    );
+  }
 );
 
 Switch.displayName = 'Switch';

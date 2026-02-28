@@ -1,6 +1,6 @@
 # Docs App
 
-The docs app is a component showcase that lets you compare all four UI libraries (Shadcn, Hero UI, DaisyUI, MUI) and the headless base side by side. Use it to explore components, see code examples, and evaluate styling differences.
+The docs app is a component showcase that lets you compare all four UI libraries (Shadcn, Hero UI, DaisyUI, MUI) and the headless base side by side. Use it to explore components, charts, typography, icons, animations, and evaluate styling differences.
 
 ## Running the Docs App
 
@@ -14,8 +14,23 @@ Or from the repo root: `pnpm --filter docs dev`
 
 - **Library switcher** – Toggle between Base (headless), Shadcn, Hero UI, DaisyUI, and MUI
 - **Component demos** – Each component has a live demo and code snippet (CodeMirror)
+- **Charts** – Bar, Line, Pie, Area, and Network Graph with design tokens, accessibility (chart/table view switch)
+- **Typography** – Text variants (h1–h4, body, body-sm, caption, overline) with design tokens
+- **Icons** – SVG icon set with configurable size and styling
+- **Animations** – CSS animation utilities (fade, scale, slide) that respect prefers-reduced-motion
 - **Same components, different styling** – The same base components are rendered with each library's styles
 - **Layout & landmarks** – Layout primitives (Box, Stack, etc.) and ARIA landmarks are also documented
+
+## Routes
+
+| Route | Description |
+|-------|-------------|
+| `/` | Home – overview and links to all sections |
+| `/components/:id` | Component demos (Button, Tabs, Accordion, etc.) |
+| `/charts/:id` | Chart demos (bar, line, pie, area, network-graph) |
+| `/typography/*` | Typography variants |
+| `/icons` | Icon gallery |
+| `/animations` | Animation utilities |
 
 ## Structure
 
@@ -24,12 +39,19 @@ apps/docs/
 ├── src/
 │   ├── App.tsx           # Routes, LibProvider
 │   ├── context/
-│   │   └── LibContext.tsx   # Library switcher state (base, shadcn, hero-ui, daisyui, mui)
+│   │   ├── LibContext.tsx    # Library switcher state (base, shadcn, hero-ui, daisyui, mui)
+│   │   └── ThemeContext.tsx   # Light/dark/system theme
 │   ├── components/
-│   │   └── Layout.tsx       # Shell, nav, library selector
+│   │   ├── Layout.tsx        # Shell, nav, library selector
+│   │   ├── ChartDoc.tsx      # Chart demo with theme
+│   │   └── CodeEditor.tsx    # Code snippet display
 │   └── pages/
-│       ├── HomePage.tsx     # Component list (Components, Layout, Landmarks)
-│       └── ComponentsPage.tsx   # Per-component demo + code
+│       ├── HomePage.tsx      # Component list (Components, Charts, Typography, Icons, Animations, Layout, Landmarks)
+│       ├── ComponentsPage.tsx # Per-component demo + code
+│       ├── ChartsPage.tsx    # Chart demos (Bar, Line, Pie, Area, Network Graph)
+│       ├── TypographyPage.tsx # Typography variants
+│       ├── IconsPage.tsx     # Icon gallery
+│       └── AnimationsPage.tsx # Animation utilities
 ├── tailwind.config.js
 └── vite.config.ts
 ```
@@ -48,6 +70,7 @@ content: [
   '../../packages/hero-ui/src/**/*.{js,ts,jsx,tsx}',
   '../../packages/daisyui/src/**/*.{js,ts,jsx,tsx}',
   '../../packages/mui/src/**/*.{js,ts,jsx,tsx}',
+  '../../packages/charts/src/**/*.{js,ts,jsx,tsx}',
 ],
 ```
 

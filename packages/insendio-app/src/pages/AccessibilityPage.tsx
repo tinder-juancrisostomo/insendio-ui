@@ -31,6 +31,11 @@ const a11yOptions = [
     label: 'Enhanced focus indicators',
     description: 'Makes keyboard focus rings more visible for easier navigation.',
   },
+  {
+    key: 'preferChartTable' as const,
+    label: 'Prefer data table for charts',
+    description: 'Shows chart data as tables by default instead of visual charts. Helps screen reader users access data in a structured format.',
+  },
 ] as const;
 
 const themeOptions: { value: 'system' | 'light' | 'dark'; label: string }[] = [

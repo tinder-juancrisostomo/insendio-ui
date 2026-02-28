@@ -29,6 +29,7 @@ design-system-ai/
 │   ├── hero-ui/       # Components styled with HeroUI (Tailwind)
 │   ├── daisyui/       # Components styled with DaisyUI (Tailwind + DaisyUI plugin)
 │   ├── mui/           # Components styled with Tailwind (MUI-inspired)
+│   ├── charts/        # Chart components (Bar, Line, Pie, Area, Network) – design tokens
 │   └── insendio-app/  # Insendio demo app + specialized components
 │
 └── apps/
@@ -86,7 +87,7 @@ To evaluate the libraries side by side:
    pnpm dev:hero-ui
    pnpm dev:mui
    ```
-2. Run the docs app for component demos: `pnpm dev:docs`
+2. Run the docs app for component demos, charts, typography, icons, and animations: `pnpm dev:docs`
 3. Check bundle size: `pnpm build` and inspect `apps/*/dist/` (see [docs/UI_LIBRARIES_COMPARISON.md](docs/UI_LIBRARIES_COMPARISON.md#bundle-size-production-build)).
 4. Read the comparison doc and recommendation.
 
@@ -99,9 +100,10 @@ To evaluate the libraries side by side:
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Monorepo structure, package layers, data flow |
 | [docs/STYLING.md](docs/STYLING.md) | Tailwind, MUI, DaisyUI, Shadcn styling approach |
 | [docs/CLASSNAMES.md](docs/CLASSNAMES.md) | How `className` flows through the component stack |
-| [docs/INSENDIO-APP.md](docs/INSENDIO-APP.md) | Insendio app, specialization pattern, component context |
+| [docs/INSENDIO-APP.md](docs/INSENDIO-APP.md) | Insendio app, pages (Dashboard, Segments, Settings, etc.), specialization pattern |
 | [docs/POC_EVALUATION.md](docs/POC_EVALUATION.md) | **Limitations, adoption path, team fit, next steps** |
-| [docs/DOCS_APP.md](docs/DOCS_APP.md) | **Docs app** – component showcase, library switcher |
+| [docs/DOCS_APP.md](docs/DOCS_APP.md) | **Docs app** – Components, Charts, Typography, Icons, Animations, library switcher |
+| [docs/CHARTS.md](docs/CHARTS.md) | **Charts package** – Bar, Line, Pie, Area, Network Graph |
 
 ## Next Steps
 
@@ -154,6 +156,9 @@ import { Button } from '@design-system/daisyui';
 
 // MUI-styled
 import { Button } from '@design-system/mui';
+
+// Charts (design-token themed)
+import { BarChart, LineChart, PieChart, NetworkGraph } from '@design-system/charts';
 ```
 
 ## Theming

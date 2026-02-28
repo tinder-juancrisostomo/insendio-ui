@@ -1,12 +1,21 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { fileURLToPath } from 'url';
+import path from 'node:path';
 
 export default defineConfig({
   plugins: [react()],
+  define: {
+    // uuid (used by react-graph-vis/vis-network) expects Node's `global`; polyfill for browser
+    global: 'globalThis',
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
+      '@design-system/typography/css': path.resolve(
+        path.dirname(fileURLToPath(import.meta.url)),
+        '../../packages/typography/src/typography.css'
+      ),
     },
   },
   optimizeDeps: {

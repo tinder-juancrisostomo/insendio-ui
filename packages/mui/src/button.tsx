@@ -1,6 +1,6 @@
-import React from 'react';
-import { Button as BaseButton, type ButtonProps as BaseButtonProps } from '@design-system/base';
-import { cn } from '@design-system/utils';
+import * as React from 'react';
+import MuiButton from '@mui/material/Button';
+import type { ButtonProps as MuiButtonProps } from '@mui/material/Button';
 
 export type ButtonVariant =
   | 'default'
@@ -12,35 +12,80 @@ export type ButtonVariant =
 
 export type ButtonSize = 'default' | 'sm' | 'lg' | 'icon';
 
-export interface ButtonProps extends BaseButtonProps {
+export interface ButtonProps extends Omit<MuiButtonProps, 'variant' | 'size'> {
   variant?: ButtonVariant;
   size?: ButtonSize;
 }
 
-const variantClass: Record<ButtonVariant, string> = {
-  default: 'ds-btn ds-btn--primary',
-  secondary: 'ds-btn ds-btn--secondary',
-  outline: 'ds-btn ds-btn--outline',
-  destructive: 'ds-btn ds-btn--destructive',
-  ghost: 'ds-btn ds-btn--ghost',
-  link: 'ds-btn ds-btn--link',
+const variantMap: Record<ButtonVariant, MuiButtonProps['variant']> = {
+  default: 'contained',
+  secondary: 'contained',
+  outline: 'outlined',
+  destructive: 'contained',
+  ghost: 'text',
+  link: 'text',
 };
 
-const sizeClass: Record<ButtonSize, string> = {
-  default: '',
-  sm: 'ds-btn--sm',
-  lg: 'ds-btn--lg',
-  icon: 'ds-btn--icon',
+const colorMap: Record<ButtonVariant, MuiButtonProps['color']> = {
+  default: 'primary',
+  secondary: 'secondary',
+  outline: 'primary',
+  destructive: 'error',
+  ghost: 'primary',
+  link: 'primary',
+};
+
+const sizeMap: Record<ButtonSize, MuiButtonProps['size']> = {
+  default: 'medium',
+  sm: 'small',
+  lg: 'large',
+  icon: 'small',
 };
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = 'default', size = 'default', ...props }, ref) => (
-    <BaseButton
-      ref={ref}
-      className={cn(variantClass[variant], sizeClass[size], className)}
-      {...props}
-    />
-  )
+  ({ variant = 'default', size = 'default', sx, ...props }, ref) => {
+    const muiVariant = variantMap[variant];
+    const muiColor = colorMap[variant];
+    const muiSize = sizeMap[size];
+    const isIconOnly = size === 'icon';
+
+    return (
+      <MuiButton
+        ref={ref}
+        variant={muiVariant}
+        color={muiColor}
+        size={muiSize}
+        sx={{
+          ...(variant === 'secondary' && {
+            backgroundColor: 'action.hover',
+            color: 'text.primary',
+            '&:hover': {
+              backgroundColor: 'action.selected',
+            },
+          }),
+          ...(variant === 'ghost' && {
+            '&:hover': {
+              backgroundColor: 'action.hover',
+            },
+          }),
+          ...(variant === 'link' && {
+            textDecoration: 'underline',
+            textUnderlineOffset: 4,
+            '&:hover': {
+              backgroundColor: 'transparent',
+              textDecoration: 'underline',
+            },
+          }),
+          ...(isIconOnly && {
+            minWidth: 40,
+            padding: 1,
+          }),
+          ...sx,
+        }}
+        {...props}
+      />
+    );
+  }
 );
 
 Button.displayName = 'Button';

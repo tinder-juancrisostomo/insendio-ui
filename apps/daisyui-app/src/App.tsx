@@ -25,6 +25,8 @@ import {
   MenuItem,
   Alert,
   Switch,
+  Dialog,
+  AlertDialog,
 } from '@design-system/daisyui';
 
 const daisyuiComponents: InsendioComponents = {
@@ -50,6 +52,8 @@ const daisyuiComponents: InsendioComponents = {
   MenuItem,
   Alert,
   Switch,
+  Dialog,
+  AlertDialog,
 };
 
 export default function App() {

@@ -1,27 +1,34 @@
-import React from 'react';
-import { Alert as BaseAlert, type AlertProps as BaseAlertProps } from '@design-system/base';
-import { cn } from '@design-system/utils';
+import * as React from 'react';
+import { Alert as HeroAlert } from '@heroui/react';
+import type { AlertProps as HeroAlertProps } from '@heroui/react';
 
-export interface AlertProps extends BaseAlertProps {
+export interface AlertProps extends Omit<HeroAlertProps, 'variant' | 'color'> {
+  children: React.ReactNode;
   variant?: 'default' | 'destructive' | 'success';
+  type?: 'polite' | 'assertive';
 }
 
-const variantClasses = {
-  default: 'rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-gray-900',
-  destructive: 'rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-red-900',
-  success: 'rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-green-900',
+const colorMap = {
+  default: 'primary' as const,
+  destructive: 'danger' as const,
+  success: 'success' as const,
 };
 
 export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
-  ({ className, variant = 'default', children, ...rest }, ref) => (
-    <BaseAlert
-      ref={ref}
-      className={cn(variantClasses[variant], className)}
-      {...rest}
-    >
-      {children}
-    </BaseAlert>
-  )
+  ({ variant = 'default', type = 'polite', children, ...props }, ref) => {
+    return (
+      <HeroAlert
+        ref={ref}
+        color={colorMap[variant]}
+        role="alert"
+        aria-live={type}
+        aria-atomic
+        {...props}
+      >
+        {children}
+      </HeroAlert>
+    );
+  }
 );
 
 Alert.displayName = 'Alert';

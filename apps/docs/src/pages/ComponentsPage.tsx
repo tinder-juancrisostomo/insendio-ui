@@ -1,4 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
+import { Text } from '@design-system/typography';
 import { useLib } from '../context/LibContext';
 import { ComponentDoc } from '../components/ComponentDoc';
 
@@ -61,7 +62,7 @@ export function ComponentsPage() {
             className="lg:sticky lg:top-6 lg:max-h-[calc(100vh-3rem)] lg:overflow-auto rounded-lg border border-[var(--ds-border-default)] bg-[var(--ds-bg-surface)] p-4"
             aria-label="Component list"
           >
-            <h2 className="text-xs font-semibold tracking-wide text-[var(--ds-text-secondary)]">Components</h2>
+            <Text variant="overline" as="h2" className="block">Components</Text>
             <div className="mt-2 flex flex-col gap-1">
               {COMPONENT_IDS.map((id) => (
                 <Link
@@ -75,7 +76,7 @@ export function ComponentsPage() {
               ))}
             </div>
 
-            <h2 className="mt-6 text-xs font-semibold tracking-wide text-[var(--ds-text-secondary)]">Layout</h2>
+            <Text variant="overline" as="h2" className="mt-6 block">Layout</Text>
             <div className="mt-2 flex flex-col gap-1">
               {LAYOUT_IDS.map((id) => (
                 <Link
@@ -89,7 +90,7 @@ export function ComponentsPage() {
               ))}
             </div>
 
-            <h2 className="mt-6 text-xs font-semibold tracking-wide text-[var(--ds-text-secondary)]">Landmarks</h2>
+            <Text variant="overline" as="h2" className="mt-6 block">Landmarks</Text>
             <div className="mt-2 flex flex-col gap-1">
               {LANDMARK_IDS.map((id) => (
                 <Link
