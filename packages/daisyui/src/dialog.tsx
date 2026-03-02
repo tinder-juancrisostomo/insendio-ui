@@ -1,32 +1,33 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
-import { Dialog as BaseDialog, type DialogProps as BaseDialogProps } from '@design-system/base';
 import { cn } from '@design-system/utils';
 
-export const Dialog = React.forwardRef<HTMLDivElement, BaseDialogProps>(
-  ({ open, onClose, className, ...props }, ref) => {
+export interface DialogProps extends React.HTMLAttributes<HTMLDivElement> {
+  open?: boolean;
+  onClose?: () => void;
+}
+
+export const Dialog = React.forwardRef<HTMLDivElement, DialogProps>(
+  ({ open, onClose, className, children, ...props }, ref) => {
     if (open !== true) return null;
     return createPortal(
-      <div className="fixed inset-0 z-[100] flex items-center justify-center">
+      <div className="modal modal-open">
         <div
-          className="ds-dialog-overlay-enter fixed inset-0 bg-black/50"
+          className="modal-backdrop bg-black/50"
           aria-hidden
           onClick={onClose}
         />
-        <BaseDialog
+        <div
           ref={ref}
-          open={open}
-          className={cn(
-            'ds-dialog-content-enter modal-box relative z-50 w-full max-w-lg',
-            className
-          )}
-          onClose={onClose}
+          role="dialog"
+          className={cn('modal-box relative', className)}
           {...props}
-        />
+        >
+          {children}
+        </div>
       </div>,
       document.body
     );
   }
 );
-
 Dialog.displayName = 'Dialog';

@@ -9,7 +9,7 @@ InsendioAlert (insendio-app)
     │  className={cn(alertStyles[variant], className)}
     │  e.g. "border border-[#2196F3] bg-[#E8F0FE]"
     ▼
-Alert (mui / daisyui / shadcn / hero-ui)
+Alert (mui / daisyui / styled-base / hero-ui)
     │  className={cn(variantClasses[variant], className)}
     │  e.g. "rounded-lg border border-gray-200 ..." + Insendio classes
     ▼

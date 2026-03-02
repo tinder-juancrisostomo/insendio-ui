@@ -1,8 +1,8 @@
 import React from 'react';
-import { Input as BaseInput, type InputProps as BaseInputProps } from '@design-system/base';
+import { Input as DaisyInput } from 'react-daisyui';
 import { cn } from '@design-system/utils';
 
-export interface InputProps extends BaseInputProps {
+export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'color'> {
   iconLeft?: React.ReactNode;
   iconRight?: React.ReactNode;
 }
@@ -12,34 +12,36 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     if (iconLeft || iconRight) {
       return (
         <div className={cn('relative flex items-center', className)}>
-          {iconLeft && <span className="absolute left-3 flex text-[var(--ds-text-muted)]">{iconLeft}</span>}
-          <BaseInput
+          {iconLeft && (
+            <span className="absolute left-3 flex text-base-content/50 pointer-events-none">
+              {iconLeft}
+            </span>
+          )}
+          <DaisyInput
             ref={ref}
             className={cn(
-              'input input-bordered w-full rounded-lg px-3 py-2 text-sm',
-              'focus:outline-none focus:ring-2 focus:ring-[var(--ds-border-focus)]',
+              'input-bordered w-full',
               iconLeft && 'pl-10',
               iconRight && 'pr-10',
               className
             )}
             {...props}
           />
-          {iconRight && <span className="absolute right-3 flex text-[var(--ds-text-muted)]">{iconRight}</span>}
+          {iconRight && (
+            <span className="absolute right-3 flex text-base-content/50 pointer-events-none">
+              {iconRight}
+            </span>
+          )}
         </div>
       );
     }
     return (
-      <BaseInput
+      <DaisyInput
         ref={ref}
-        className={cn(
-          'input input-bordered w-full rounded-lg px-3 py-2 text-sm',
-          'focus:outline-none focus:ring-2 focus:ring-[var(--ds-border-focus)]',
-          className
-        )}
+        className={cn('input-bordered w-full', className)}
         {...props}
       />
     );
   }
 );
-
 Input.displayName = 'Input';

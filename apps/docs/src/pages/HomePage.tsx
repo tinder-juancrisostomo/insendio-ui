@@ -51,11 +51,15 @@ export function HomePage() {
     <div className="mx-auto max-w-4xl">
       <section className="mb-12">
         <Text variant="h1" as="h1" className="mb-2">
-          Design System Component Library
+          Design System
         </Text>
         <Text variant="body" className="text-[var(--ds-text-secondary)] text-lg">
           Accessible UI components following W3C ARIA APG patterns. Switch libraries above to see
-          the same components styled with Shadcn UI, HeroUI, DaisyUI, or Material UI.
+          the same components styled with Shadcn UI, HeroUI, DaisyUI, or Material UI. Visit the{' '}
+          <Link to="/apps" className="text-[var(--ds-text-link)] hover:underline">
+            Apps
+          </Link>{' '}
+          page to explore full Insendio demo apps.
         </Text>
       </section>
 
@@ -151,6 +155,21 @@ export function HomePage() {
             className="block p-4 rounded-lg border border-[var(--ds-border-default)] bg-[var(--ds-bg-surface)] hover:border-[var(--ds-border-focus)] transition-colors"
           >
             Charts &amp; Visualizations
+          </Link>
+        </div>
+      </section>
+
+      <section className="mt-10">
+        <Text variant="h3" as="h2" className="mb-4">Apps</Text>
+        <Text variant="body-sm" className="mb-6">
+          Full Insendio demo apps (MUI, Hero UI, DaisyUI, etc.) — each with the same UI using a different component library.
+        </Text>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+          <Link
+            to="/apps"
+            className="block p-4 rounded-lg border border-[var(--ds-border-default)] bg-[var(--ds-bg-surface)] hover:border-[var(--ds-border-focus)] transition-colors"
+          >
+            Demo Apps
           </Link>
         </div>
       </section>

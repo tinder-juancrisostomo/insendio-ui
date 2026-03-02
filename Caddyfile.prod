@@ -1,0 +1,52 @@
+# Production config: serves built docs from filesystem (no preview process).
+# Run from project root: caddy run --config Caddyfile.prod
+# Prerequisite: pnpm build:docs
+
+:8080
+
+# Forward full path to apps (they use base paths like /mui/, /daisy-ui/)
+handle /mui/* {
+  reverse_proxy localhost:3001
+}
+
+handle /hero-ui/* {
+  reverse_proxy localhost:3002
+}
+
+handle /styled-base/* {
+  reverse_proxy localhost:3003
+}
+
+handle /shadcn-redix/* {
+  reverse_proxy localhost:3004
+}
+
+handle /shadcn-ui/* {
+  reverse_proxy localhost:3005
+}
+
+handle /daisy-ui/* {
+  reverse_proxy localhost:3006
+}
+
+# Serve JS assets with correct MIME type (must be before catch-all handle)
+handle /assets/*.js {
+  root * ./apps/docs/dist
+  header Content-Type application/javascript
+  file_server
+}
+
+handle /assets/*.css {
+  root * ./apps/docs/dist
+  header Content-Type text/css
+  file_server
+}
+
+# SPA fallback: rewrite non-asset paths to index.html so client-side routes work on refresh
+handle / {
+  root * ./apps/docs/dist
+  @notAsset not path /assets/*
+  rewrite @notAsset /index.html
+  try_files {path} /index.html
+  file_server
+}

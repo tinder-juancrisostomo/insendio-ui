@@ -25,7 +25,9 @@ design-system-ai/
 │   ├── typography/    # Text components
 │   ├── icons/         # Icon set
 │   │
-│   ├── shadcn/        # Components styled with Shadcn UI (Tailwind)
+│   ├── styled-base/   # Tailwind + design tokens on headless base (no external lib)
+│   ├── shadcn-radix/  # Shadcn's model: Radix UI + Tailwind + design tokens
+│   ├── shadcn-ui/     # Components copied from shadcn/ui via CLI
 │   ├── hero-ui/       # Components styled with HeroUI (Tailwind)
 │   ├── daisyui/       # Components styled with DaisyUI (Tailwind + DaisyUI plugin)
 │   ├── mui/           # Components styled with Tailwind (MUI-inspired)
@@ -35,8 +37,10 @@ design-system-ai/
 └── apps/
     ├── mui-app/       # Insendio app with MUI components
     ├── daisyui-app/   # Insendio app with DaisyUI components
-    ├── shadcn-app/    # Insendio app with Shadcn components
-    ├── hero-ui-app/   # Insendio app with Hero UI components
+    ├── styled-base-app/  # Insendio app with Styled Base (Tailwind + base)
+    ├── shadcn-radix-app/ # Insendio app with Shadcn Radix (Radix + Tailwind)
+    ├── shadcn-ui-app/    # Insendio app with Shadcn UI (copied components)
+    ├── hero-ui-app/      # Insendio app with Hero UI components
     └── docs/          # Documentation app
 ```
 
@@ -64,10 +68,12 @@ pnpm install
 pnpm build
 
 # Run a demo app (Insendio with different component libraries)
-pnpm dev:shadcn     # Shadcn-styled (recommended)
-pnpm dev:daisyui    # DaisyUI-styled
-pnpm dev:hero-ui    # Hero UI-styled
-pnpm dev:mui        # MUI-styled
+pnpm dev:styled-base   # Tailwind + tokens on headless base
+pnpm dev:shadcn-radix  # Radix + Tailwind (shadcn's model)
+pnpm dev:shadcn-ui     # Copied shadcn components
+pnpm dev:daisyui       # DaisyUI-styled
+pnpm dev:hero-ui       # Hero UI-styled
+pnpm dev:mui           # MUI-styled
 
 # Run docs app (component demos)
 pnpm dev:docs
@@ -76,13 +82,33 @@ pnpm dev:docs
 pnpm dev
 ```
 
+## Production (Caddy)
+
+Serve everything from **http://localhost:8080/** via Caddy:
+
+```bash
+# One command: builds docs, starts all apps + Caddy
+pnpm start:prod
+```
+
+Or run separately:
+
+```bash
+pnpm build:docs
+# Start apps in separate terminals, then:
+pnpm serve:prod
+```
+
+- **/** → docs (built, served from `apps/docs/dist`)
+- **/mui/**, **/hero-ui/**, etc. → proxied to respective dev apps
+
 ## Try It Yourself
 
 To evaluate the libraries side by side:
 
 1. Run each app and compare the same Insendio demo:
    ```bash
-   pnpm dev:shadcn     # Recommended
+   pnpm dev:styled-base   # Tailwind + base (recommended)
    pnpm dev:daisyui
    pnpm dev:hero-ui
    pnpm dev:mui
@@ -100,6 +126,7 @@ To evaluate the libraries side by side:
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Monorepo structure, package layers, data flow |
 | [docs/STYLING.md](docs/STYLING.md) | Tailwind, MUI, DaisyUI, Shadcn styling approach |
 | [docs/CLASSNAMES.md](docs/CLASSNAMES.md) | How `className` flows through the component stack |
+| **Package docs** | [docs/README.md](docs/README.md#package-documentation) – BASE, STYLED_BASE, DAISYUI, MUI, etc. |
 | [docs/INSENDIO-APP.md](docs/INSENDIO-APP.md) | Insendio app, pages (Dashboard, Segments, Settings, etc.), specialization pattern |
 | [docs/POC_EVALUATION.md](docs/POC_EVALUATION.md) | **Limitations, adoption path, team fit, next steps** |
 | [docs/DOCS_APP.md](docs/DOCS_APP.md) | **Docs app** – Components, Charts, Typography, Icons, Animations, library switcher |
@@ -146,7 +173,7 @@ See [docs/POC_EVALUATION.md](docs/POC_EVALUATION.md) for details.
 import { Button, Tabs } from '@design-system/base';
 
 // Shadcn-styled
-import { Button, Tabs } from '@design-system/shadcn';
+import { Button, Tabs } from '@design-system/styled-base';
 
 // HeroUI-styled
 import { Button } from '@design-system/hero-ui';

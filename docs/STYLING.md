@@ -63,7 +63,7 @@ const variantClasses = {
 plugins: [require('daisyui')],
 ```
 
-### Shadcn (`@design-system/shadcn`)
+### Styled Base (`@design-system/styled-base`)
 
 - **Styling**: Tailwind utility classes (similar to MUI)
 - **Naming**: Shadcn-inspired look (rounded, subtle borders)
@@ -72,7 +72,7 @@ plugins: [require('daisyui')],
 ### Hero UI (`@design-system/hero-ui`)
 
 - **Styling**: Tailwind utility classes
-- Same pattern as MUI and Shadcn
+- Same pattern as MUI and Styled Base
 
 ## The `cn()` Utility
 
@@ -113,5 +113,5 @@ className="border-[var(--ds-border-default)] bg-[var(--ds-bg-muted)]"
 |----------|----------|-----------|----------------------|
 | mui      | Yes      | None      | Utility classes      |
 | daisyui  | Yes      | DaisyUI   | DaisyUI + utilities  |
-| shadcn   | Yes      | None      | Utility classes      |
+| styled-base | Yes      | None      | Utility classes      |
 | hero-ui  | Yes      | None      | Utility classes      |

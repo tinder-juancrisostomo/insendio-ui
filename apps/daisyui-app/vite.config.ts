@@ -6,6 +6,7 @@ import path from 'node:path';
 import { watchInsendioPlugin } from '@design-system/insendio-app/vite-watch-plugin';
 
 export default defineConfig({
+  base: '/daisy-ui/',
   plugins: [react(), watchInsendioPlugin() as Plugin],
   define: { global: 'globalThis' },
   resolve: {
@@ -31,7 +32,8 @@ export default defineConfig({
     exclude: ['@design-system/insendio-app'],
   },
   server: {
-    port: 3004,
+    port: 3006,
+    strictPort: true,
     fs: {
       allow: [searchForWorkspaceRoot(process.cwd())],
     },

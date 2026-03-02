@@ -24,13 +24,21 @@ export default defineConfig({
     force: true,
     include: [
       '@design-system/base',
-      '@design-system/shadcn',
+      '@design-system/styled-base',
       '@design-system/hero-ui',
       '@design-system/daisyui',
       '@design-system/mui',
     ],
   },
   server: {
+    port: 3000,
+    origin: 'http://localhost:8080',
+    hmr: {
+      clientPort: 8080,
+      host: 'localhost',
+    },
+  },
+  preview: {
     port: 3000,
   },
 });

@@ -6,6 +6,7 @@ import path from 'node:path';
 import { watchInsendioPlugin } from '@design-system/insendio-app/vite-watch-plugin';
 
 export default defineConfig({
+  base: '/hero-ui/',
   plugins: [react(), watchInsendioPlugin() as Plugin],
   define: { global: 'globalThis' },
   resolve: {
@@ -32,6 +33,7 @@ export default defineConfig({
   },
   server: {
     port: 3002,
+    strictPort: true,
     fs: {
       allow: [searchForWorkspaceRoot(process.cwd())],
     },

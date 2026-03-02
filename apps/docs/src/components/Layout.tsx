@@ -41,6 +41,9 @@ export function Layout() {
               <Link to="/animations" className="text-[var(--ds-text-secondary)] hover:text-[var(--ds-text-primary)]">
                 Animations
               </Link>
+              <Link to="/apps" className="text-[var(--ds-text-secondary)] hover:text-[var(--ds-text-primary)]">
+                Apps
+              </Link>
             </Nav>
           </div>
           <div className="flex flex-wrap items-center gap-3">

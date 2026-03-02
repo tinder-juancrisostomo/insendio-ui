@@ -28,8 +28,8 @@ export interface ComponentDocSpec {
 
 export function packageNameForLib(lib: LibId) {
   switch (lib) {
-    case 'shadcn':
-      return '@design-system/shadcn';
+    case 'styled-base':
+      return '@design-system/styled-base';
     case 'hero-ui':
       return '@design-system/hero-ui';
     case 'daisyui':

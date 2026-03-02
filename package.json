@@ -8,10 +8,15 @@
     "dev:docs": "pnpm --filter docs dev",
     "dev:mui": "pnpm --filter mui-app dev",
     "dev:hero-ui": "pnpm --filter hero-ui-app dev",
-    "dev:shadcn": "pnpm --filter shadcn-app dev",
+    "dev:styled-base": "pnpm --filter styled-base-app dev",
+    "dev:shadcn-radix": "pnpm --filter shadcn-radix-app dev",
+    "dev:shadcn-ui": "pnpm --filter shadcn-ui-app dev",
     "dev:daisyui": "pnpm --filter daisyui-app dev",
     "build": "pnpm -r build",
     "build:docs": "pnpm --filter docs build",
+    "preview:docs": "pnpm --filter docs preview",
+    "serve:prod": "caddy run --config Caddyfile.prod",
+    "start:prod": "pnpm build:docs && concurrently -n mui,hero,styled,radix,shadcn,daisy,caddy \"pnpm dev:mui\" \"sleep 1.5 && pnpm dev:hero-ui\" \"sleep 3 && pnpm dev:styled-base\" \"sleep 4.5 && pnpm dev:shadcn-radix\" \"sleep 6 && pnpm dev:shadcn-ui\" \"sleep 7.5 && pnpm dev:daisyui\" \"sleep 9 && pnpm serve:prod\"",
     "lint": "pnpm -r lint",
     "test": "pnpm -r test"
   },
@@ -25,5 +30,8 @@
   "license": "MIT",
   "engines": {
     "node": ">=18"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
   }
 }

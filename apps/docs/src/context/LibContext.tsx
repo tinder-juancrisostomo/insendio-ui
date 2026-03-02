@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useCallback } from 'react';
 
-export type LibId = 'base' | 'shadcn' | 'hero-ui' | 'daisyui' | 'mui';
+export type LibId = 'base' | 'styled-base' | 'hero-ui' | 'daisyui' | 'mui';
 
 interface LibContextValue {
   lib: LibId;
@@ -11,7 +11,7 @@ const LibContext = createContext<LibContextValue | null>(null);
 
 const LIB_LABELS: Record<LibId, string> = {
   base: 'Base (Headless)',
-  shadcn: 'Shadcn UI',
+  'styled-base': 'Styled Base',
   'hero-ui': 'HeroUI',
   daisyui: 'DaisyUI',
   mui: 'Material UI',

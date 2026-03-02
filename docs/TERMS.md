@@ -62,7 +62,7 @@ Example: `cn('p-4', isActive && 'bg-blue-500', className)` — if both `p-4` and
 
 ## Styled Package
 
-A **styled package** wraps headless base components with visual styling. In this repo: `@design-system/shadcn`, `@design-system/hero-ui`, `@design-system/daisyui`, `@design-system/mui`.
+A **styled package** wraps headless base components with visual styling. In this repo: `@design-system/styled-base`, `@design-system/hero-ui`, `@design-system/daisyui`, `@design-system/mui`.
 
 Each exports the same component API (Button, Tabs, etc.) but applies different CSS via Tailwind classes or library-specific styles.
 

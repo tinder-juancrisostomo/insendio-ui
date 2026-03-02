@@ -4,7 +4,8 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  Apps (mui-app, daisyui-app, shadcn-app, hero-ui-app)            │
+│  Apps (mui-app, daisyui-app, hero-ui-app, styled-base-app,        │
+│        shadcn-radix-app, shadcn-ui-app)                           │
 │  - Consume design system packages                                 │
 │  - Provide InsendioComponentsProvider with chosen library         │
 │  - Tailwind content includes packages                             │
@@ -23,9 +24,10 @@
               ▼                               ▼
 ┌─────────────────────────────┐   ┌─────────────────────────────────┐
 │  charts                      │   │  Styled packages (mui, daisyui,  │
-│  - Bar, Line, Pie, Area,    │   │  shadcn, hero-ui)                │
-│    NetworkGraph             │   │  - Wrap base components          │
-│  - Uses base, utils, tokens  │   │  - Accept className, merge cn()  │
+│  - Bar, Line, Pie, Area,    │   │  styled-base, hero-ui,           │
+│    NetworkGraph             │   │  shadcn-radix, shadcn-ui)         │
+│  - Uses base, utils, tokens  │   │  - Wrap base components          │
+│  (design tokens)             │   │  - Accept className, merge cn()  │
 └─────────────────────────────┘   └─────────────────────────────────┘
               │                               │
               └───────────────┬───────────────┘
@@ -48,7 +50,9 @@
 | `icons` | React |
 | `mui` | base, tokens, utils |
 | `daisyui` | base, tokens, utils |
-| `shadcn` | base, tokens, utils |
+| `styled-base` | base, tokens, utils |
+| `shadcn-radix` | base, tokens, utils, @radix-ui/* |
+| `shadcn-ui` | base, tokens, utils, @radix-ui/* |
 | `hero-ui` | base, tokens, utils |
 | `insendio-app` | base, icons, typography, utils, charts |
 | `charts` | base, utils |

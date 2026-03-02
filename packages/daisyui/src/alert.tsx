@@ -1,27 +1,27 @@
 import React from 'react';
-import { Alert as BaseAlert, type AlertProps as BaseAlertProps } from '@design-system/base';
+import { Alert as DaisyAlert } from 'react-daisyui';
 import { cn } from '@design-system/utils';
 
-export interface AlertProps extends BaseAlertProps {
+export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: 'default' | 'destructive' | 'success';
 }
 
-const variantClasses = {
-  default: 'alert alert-info',
-  destructive: 'alert alert-error',
-  success: 'alert alert-success',
+const variantToStatus: Record<NonNullable<AlertProps['variant']>, string> = {
+  default: 'info',
+  destructive: 'error',
+  success: 'success',
 };
 
 export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
   ({ className, variant = 'default', children, ...rest }, ref) => (
-    <BaseAlert
+    <DaisyAlert
       ref={ref}
-      className={cn(variantClasses[variant], className)}
+      status={variantToStatus[variant] as any}
+      className={cn(className)}
       {...rest}
     >
       {children}
-    </BaseAlert>
+    </DaisyAlert>
   )
 );
-
 Alert.displayName = 'Alert';

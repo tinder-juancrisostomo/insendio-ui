@@ -1,48 +1,58 @@
-import {
-  Menu as BaseMenu,
-  MenuButton as BaseMenuButton,
-  MenuList as BaseMenuList,
-  MenuItem as BaseMenuItem,
-  type MenuProps as BaseMenuProps,
-  type MenuButtonProps as BaseMenuButtonProps,
-  type MenuListProps as BaseMenuListProps,
-  type MenuItemProps as BaseMenuItemProps,
-} from '@design-system/base';
+import React from 'react';
+import { Dropdown } from 'react-daisyui';
 import { cn } from '@design-system/utils';
 
-export function Menu(props: BaseMenuProps) {
-  return <BaseMenu className="dropdown dropdown-end" {...props} />;
+export interface MenuProps extends React.HTMLAttributes<HTMLDivElement> {
+  children: React.ReactNode;
 }
 
-export function MenuButton({ className, ...props }: BaseMenuButtonProps) {
+export function Menu({ children, className, ...props }: MenuProps) {
   return (
-    <BaseMenuButton
-      className={cn('btn', className)}
-      {...props}
-    />
+    <Dropdown end className={cn(className)} {...props}>
+      {children}
+    </Dropdown>
   );
 }
 
-export function MenuList({ className, ...props }: BaseMenuListProps) {
+export interface MenuButtonProps {
+  children: React.ReactNode;
+  className?: string;
+  disabled?: boolean;
+}
+
+export function MenuButton({ children, className, ...props }: MenuButtonProps) {
   return (
-    <BaseMenuList
-      className={cn(
-        'dropdown-content menu z-50 mt-1 min-w-[8rem] rounded-box bg-base-100 p-1 shadow',
-        className
-      )}
-      {...props}
-    />
+    <Dropdown.Toggle button className={cn(className)} {...props}>
+      {children}
+    </Dropdown.Toggle>
   );
 }
 
-export function MenuItem({ className, ...props }: BaseMenuItemProps) {
+export interface MenuListProps extends React.HTMLAttributes<HTMLUListElement> {
+  children: React.ReactNode;
+}
+
+export function MenuList({ children, className, ...props }: MenuListProps) {
   return (
-    <BaseMenuItem
-      className={cn(
-        'menu-item flex cursor-pointer items-center px-2 py-1.5 text-sm outline-none hover:bg-base-200 focus:bg-base-200',
-        className
-      )}
-      {...props}
-    />
+    <Dropdown.Menu className={cn('z-50', className)} {...props}>
+      {children}
+    </Dropdown.Menu>
+  );
+}
+
+export interface MenuItemProps extends React.LiHTMLAttributes<HTMLLIElement> {
+  children: React.ReactNode;
+  onSelect?: () => void;
+}
+
+export function MenuItem({ children, className, onSelect, onClick, ...props }: MenuItemProps) {
+  const handleClick = (e: React.MouseEvent<HTMLLIElement>) => {
+    onClick?.(e);
+    onSelect?.();
+  };
+  return (
+    <li className={cn('cursor-pointer', className)} onClick={handleClick} {...props}>
+      {children}
+    </li>
   );
 }

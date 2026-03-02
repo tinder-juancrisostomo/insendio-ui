@@ -17,7 +17,7 @@
     "@design-system/daisyui": "workspace:*",
     "@design-system/hero-ui": "workspace:*",
     "@design-system/mui": "workspace:*",
-    "@design-system/shadcn": "workspace:*",
+    "@design-system/styled-base": "workspace:*",
     "@design-system/tokens": "workspace:*",
     "@design-system/typography": "workspace:*",
     "@design-system/icons": "workspace:*",

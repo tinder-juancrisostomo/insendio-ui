@@ -10,6 +10,7 @@ const ChartsPage = lazy(() => import('./pages/ChartsPage').then((m) => ({ defaul
 const TypographyPage = lazy(() => import('./pages/TypographyPage').then((m) => ({ default: m.TypographyPage })));
 const IconsPage = lazy(() => import('./pages/IconsPage').then((m) => ({ default: m.IconsPage })));
 const AnimationsPage = lazy(() => import('./pages/AnimationsPage').then((m) => ({ default: m.AnimationsPage })));
+const AppsPage = lazy(() => import('./pages/AppsPage').then((m) => ({ default: m.AppsPage })));
 
 export default function App() {
   return (
@@ -26,6 +27,7 @@ export default function App() {
             <Route path="typography/*" element={<TypographyPage />} />
             <Route path="icons" element={<IconsPage />} />
             <Route path="animations" element={<AnimationsPage />} />
+            <Route path="apps" element={<AppsPage />} />
           </Route>
         </Routes>
       </Suspense>

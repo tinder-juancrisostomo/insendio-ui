@@ -1,30 +1,33 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
-import { AlertDialog as BaseAlertDialog, type AlertDialogProps as BaseAlertDialogProps } from '@design-system/base';
 import { cn } from '@design-system/utils';
 
-export const AlertDialog = React.forwardRef<HTMLDivElement, BaseAlertDialogProps>(
-  ({ className, children, open, onClose, ...rest }, ref) => {
+export interface AlertDialogProps extends React.HTMLAttributes<HTMLDivElement> {
+  open?: boolean;
+  onClose?: () => void;
+}
+
+export const AlertDialog = React.forwardRef<HTMLDivElement, AlertDialogProps>(
+  ({ open, onClose, className, children, ...props }, ref) => {
     if (open !== true) return null;
     return createPortal(
-      <div className="fixed inset-0 z-[100] flex items-center justify-center">
-        <div className="ds-dialog-overlay-enter fixed inset-0 bg-black/50" aria-hidden />
-        <BaseAlertDialog
+      <div className="modal modal-open">
+        <div
+          className="modal-backdrop bg-black/50"
+          aria-hidden
+          onClick={onClose}
+        />
+        <div
           ref={ref}
-          open={open}
-          onClose={onClose}
-          className={cn(
-            'ds-dialog-content-enter modal-box relative z-50 w-full max-w-md',
-            className
-          )}
-          {...rest}
+          role="alertdialog"
+          className={cn('modal-box modal-bottom sm:modal-middle relative', className)}
+          {...props}
         >
           {children}
-        </BaseAlertDialog>
+        </div>
       </div>,
       document.body
     );
   }
 );
-
 AlertDialog.displayName = 'AlertDialog';

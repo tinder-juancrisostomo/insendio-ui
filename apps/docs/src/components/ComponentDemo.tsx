@@ -1,7 +1,7 @@
 import React from 'react';
 import type { LibId } from '../context/LibContext';
 import * as BaseDS from '@design-system/base';
-import * as ShadcnDS from '@design-system/shadcn';
+import * as StyledBaseDS from '@design-system/styled-base';
 import * as HeroDS from '@design-system/hero-ui';
 import * as DaisyDS from '@design-system/daisyui';
 import * as MuiDS from '@design-system/mui';
@@ -13,7 +13,7 @@ interface ComponentDemoProps {
 
 const LIB_MODULES: Record<LibId, Record<string, React.ComponentType<any>>> = {
   base: BaseDS,
-  shadcn: ShadcnDS,
+  'styled-base': StyledBaseDS,
   'hero-ui': HeroDS,
   daisyui: DaisyDS,
   mui: MuiDS,

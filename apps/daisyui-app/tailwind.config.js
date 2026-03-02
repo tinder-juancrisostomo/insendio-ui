@@ -8,9 +8,11 @@ export default {
     '../../packages/typography/src/**/*.{js,ts,jsx,tsx}',
     '../../packages/insendio-app/src/**/*.{js,ts,jsx,tsx}',
     '../../packages/charts/src/**/*.{js,ts,jsx,tsx}',
+    './node_modules/react-daisyui/dist/**/*.js',
+    './node_modules/daisyui/dist/**/*.js',
   ],
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [require('daisyui')],
 };

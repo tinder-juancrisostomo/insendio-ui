@@ -20,6 +20,7 @@ Or from the repo root: `pnpm --filter docs dev`
 - **Animations** – CSS animation utilities (fade, scale, slide) that respect prefers-reduced-motion
 - **Same components, different styling** – The same base components are rendered with each library's styles
 - **Layout & landmarks** – Layout primitives (Box, Stack, etc.) and ARIA landmarks are also documented
+- **Apps** – Links to full Insendio demo apps (MUI, Hero UI, Styled Base, Shadcn Radix, Shadcn UI, Daisy UI)
 
 ## Routes
 
@@ -31,6 +32,7 @@ Or from the repo root: `pnpm --filter docs dev`
 | `/typography/*` | Typography variants |
 | `/icons` | Icon gallery |
 | `/animations` | Animation utilities |
+| `/apps` | Links to demo apps (mui, hero-ui, styled-base, shadcn-redix, shadcn-ui, daisy-ui) |
 
 ## Structure
 
@@ -39,19 +41,20 @@ apps/docs/
 ├── src/
 │   ├── App.tsx           # Routes, LibProvider
 │   ├── context/
-│   │   ├── LibContext.tsx    # Library switcher state (base, shadcn, hero-ui, daisyui, mui)
+│   │   ├── LibContext.tsx    # Library switcher state (base, styled-base, hero-ui, daisyui, mui)
 │   │   └── ThemeContext.tsx   # Light/dark/system theme
 │   ├── components/
 │   │   ├── Layout.tsx        # Shell, nav, library selector
 │   │   ├── ChartDoc.tsx      # Chart demo with theme
 │   │   └── CodeEditor.tsx    # Code snippet display
 │   └── pages/
-│       ├── HomePage.tsx      # Component list (Components, Charts, Typography, Icons, Animations, Layout, Landmarks)
+│       ├── HomePage.tsx      # Component list (Components, Charts, Typography, Icons, Animations, Layout, Landmarks, Apps)
 │       ├── ComponentsPage.tsx # Per-component demo + code
 │       ├── ChartsPage.tsx    # Chart demos (Bar, Line, Pie, Area, Network Graph)
 │       ├── TypographyPage.tsx # Typography variants
 │       ├── IconsPage.tsx     # Icon gallery
-│       └── AnimationsPage.tsx # Animation utilities
+│       ├── AnimationsPage.tsx # Animation utilities
+│       └── AppsPage.tsx      # Links to demo apps (mui, hero-ui, styled-base, etc.)
 ├── tailwind.config.js
 └── vite.config.ts
 ```
@@ -66,7 +69,7 @@ apps/docs/
 content: [
   './index.html',
   './src/**/*.{js,ts,jsx,tsx}',
-  '../../packages/shadcn/src/**/*.{js,ts,jsx,tsx}',
+  '../../packages/styled-base/src/**/*.{js,ts,jsx,tsx}',
   '../../packages/hero-ui/src/**/*.{js,ts,jsx,tsx}',
   '../../packages/daisyui/src/**/*.{js,ts,jsx,tsx}',
   '../../packages/mui/src/**/*.{js,ts,jsx,tsx}',
@@ -120,3 +123,7 @@ pnpm build:docs
 ```
 
 Output: `apps/docs/dist/`
+
+## Production (Caddy)
+
+When using `pnpm start:prod`, the docs app is built and served as the landing page at **http://localhost:8080/**. Caddy serves the built files from `apps/docs/dist` and proxies demo apps at `/mui/`, `/hero-ui/`, `/styled-base/`, `/shadcn-redix/`, `/shadcn-ui/`, `/daisy-ui/`. The Apps page (`/apps`) links to these demo apps.

@@ -3,7 +3,7 @@ export default {
   content: [
     './index.html',
     './src/**/*.{js,ts,jsx,tsx}',
-    '../../packages/shadcn/src/**/*.{js,ts,jsx,tsx}',
+    '../../packages/styled-base/src/**/*.{js,ts,jsx,tsx}',
     '../../packages/hero-ui/src/**/*.{js,ts,jsx,tsx}',
     '../../packages/daisyui/src/**/*.{js,ts,jsx,tsx}',
     '../../packages/mui/src/**/*.{js,ts,jsx,tsx}',

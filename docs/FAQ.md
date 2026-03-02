@@ -68,6 +68,26 @@ See [STYLING.md](STYLING.md) for how styling works in this PoC.
 - **Component wrappers (Button, Input, etc.):** The app uses `useInsendioComponents()` to get components—it never imports from `@mui/material` directly. Each library implementation must expose the same interface (e.g. `variant="outline"`), but MUI uses `variant="outlined"`, Shadcn uses `variant="outline"`, etc. The wrappers map our unified API to each library's native API.
 - **After choosing a library:** If we pick MUI, we can remove the wrappers and use MUI directly. The theme stays.
 
+### 5. Why are we considering shadcn as an option to adopt for our internal projects?
+
+**Short answer:** Shadcn was recommended in this PoC because it best aligns with our stack (Tailwind, design tokens, full control) and has minimal footprint. Shadcn is not a traditional npm package—it uses a **copy-paste model** built on **Radix UI + Tailwind**. We evaluate it in two ways:
+
+1. **`@design-system/styled-base`** – Tailwind + design tokens on our headless base (no Radix). Lightweight, full control.
+2. **`@design-system/shadcn-radix`** – Radix UI primitives + Tailwind + design tokens (shadcn's model).
+3. **`@design-system/shadcn-ui`** – Components copied from shadcn/ui via CLI (Radix + Tailwind + CVA).
+
+**What is "shadcn's real model" (Radix + Tailwind + copy-paste)?**
+
+Shadcn/ui is *not* distributed as an npm component library. Instead, it uses three pillars:
+
+1. **Radix UI** – Shadcn components are built on top of [Radix UI](https://www.radix-ui.com/) primitives. Radix provides accessible, unstyled building blocks. Shadcn adds the visual layer on top.
+
+2. **Tailwind CSS** – All styling is done with Tailwind utility classes. No CSS-in-JS or custom styling engine.
+
+3. **Copy-paste** – You run `npx shadcn add button` and the CLI copies component source code into your project. You own the code; you can modify, version, and maintain components yourself.
+
+See [UI_LIBRARIES_COMPARISON.md](UI_LIBRARIES_COMPARISON.md) for the full evaluation and recommendation.
+
 ---
 
 ## Non-Technical
