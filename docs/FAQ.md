@@ -70,11 +70,11 @@ See [STYLING.md](STYLING.md) for how styling works in this PoC.
 
 ### 5. Why are we considering shadcn as an option to adopt for our internal projects?
 
-**Short answer:** Shadcn was recommended in this PoC because it best aligns with our stack (Tailwind, design tokens, full control) and has minimal footprint. Shadcn is not a traditional npm package—it uses a **copy-paste model** built on **Radix UI + Tailwind**. We evaluate it in two ways:
+**Short answer:** Shadcn is the recommended winner in this PoC because we prioritize **speed and reuse**. Copy-paste pre-built components; no need to create them from scratch. Shadcn is not a traditional npm package—it uses a **copy-paste model** built on **Radix UI + Tailwind**. We evaluate it in three ways:
 
-1. **`@design-system/styled-base`** – Tailwind + design tokens on our headless base (no Radix). Lightweight, full control.
-2. **`@design-system/shadcn-radix`** – Radix UI primitives + Tailwind + design tokens (shadcn's model).
-3. **`@design-system/shadcn-ui`** – Components copied from shadcn/ui via CLI (Radix + Tailwind + CVA).
+1. **`@design-system/shadcn-ui`** – **Recommended.** Components copied from shadcn/ui via CLI (Radix + Tailwind + CVA). Speed and reuse.
+2. **`@design-system/styled-base`** – Tailwind + design tokens on our headless base (no Radix). Full control, single base.
+3. **`@design-system/shadcn-radix`** – Radix UI primitives + Tailwind + design tokens (shadcn's model).
 
 **What is "shadcn's real model" (Radix + Tailwind + copy-paste)?**
 

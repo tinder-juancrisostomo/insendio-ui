@@ -7,11 +7,11 @@ Design system components styled with MUI (Material UI). Enterprise-grade, Materi
 ## Overview
 
 **Package:** `@design-system/mui`  
-**Description:** Design system components styled with MUI  
-**Dependencies:** `@design-system/base`, `@design-system/tokens`, `@design-system/utils`, `@mui/material` ^6.1.6, `@mui/icons-material` ^6.1.6  
+**Description:** Design system components styled with MUI + styled-components  
+**Dependencies:** `@design-system/base`, `@design-system/tokens`, `@design-system/utils`, `@mui/material` ^6.1.6, `@mui/icons-material` ^6.1.6, `@mui/styled-engine-sc`, `styled-components`  
 **Peer dependencies:** `react` >=18, `react-dom` >=18
 
-The MUI package wraps base components and maps to MUI components. It includes a **theme** (`createTheme`) that applies our design tokens to MUI, plus **component wrappers** for the polymorphic Insendio API.
+The MUI package wraps base components and maps to MUI components. It uses **styled-components** (via `@mui/styled-engine-sc`) instead of Emotion. It includes a **theme** (`createTheme`) that applies our design tokens to MUI, plus **component wrappers** for the polymorphic Insendio API.
 
 ---
 
@@ -20,7 +20,7 @@ The MUI package wraps base components and maps to MUI components. It includes a 
 - **MUI theme** – `createTheme()` with our tokens (palette, typography, component overrides).
 - **ThemeProvider** – Apps wrap with `DesignSystemThemeProvider` to apply the theme.
 - **Component wrappers** – Map our API (`variant="outline"`) to MUI API (`variant="outlined"`).
-- **Tailwind** – Our setup uses Tailwind + tokens; MUI's Emotion/sx is configured to work alongside.
+- **styled-components** – MUI uses `@mui/styled-engine-sc` to use styled-components instead of Emotion. Root `package.json` has pnpm overrides; mui-app has Vite alias.
 
 ---
 

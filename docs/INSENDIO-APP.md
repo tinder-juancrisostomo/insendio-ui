@@ -161,7 +161,8 @@ When `library` is not provided, the suffix is omitted.
 ## Running the App
 
 ```bash
-pnpm dev:styled-base    # Styled base (recommended)
+pnpm dev:shadcn-ui      # Shadcn (recommended)
+pnpm dev:styled-base    # Styled base
 pnpm dev:shadcn-radix   # Shadcn Radix (Radix + Tailwind)
 pnpm dev:shadcn-ui      # Shadcn UI (copied components)
 pnpm dev:daisyui        # DaisyUI components

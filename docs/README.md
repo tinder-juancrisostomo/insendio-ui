@@ -6,7 +6,8 @@ Technical documentation for the UI libraries Proof of Concept monorepo.
 
 | Document | Description |
 |----------|-------------|
-| [UI_LIBRARIES_COMPARISON.md](UI_LIBRARIES_COMPARISON.md) | **Overview, pros, cons, and recommendation** |
+| [UI_LIBRARIES_COMPARISON.md](UI_LIBRARIES_COMPARISON.md) | **Overview, pros, cons, and recommendation** (Tailwind stack) |
+| [UI_LIBRARIES_STYLED_COMPONENTS.md](UI_LIBRARIES_STYLED_COMPONENTS.md) | **Recommendation when styled-components is the stack** |
 | [TERMS.md](TERMS.md) | **Important terms** (headless, design tokens, etc.) |
 | [ARCHITECTURE.md](ARCHITECTURE.md) | Package layers, dependency flow, component polymorphism |
 | [STYLING.md](STYLING.md) | Tailwind usage, MUI vs DaisyUI vs Shadcn, `cn()` utility |
@@ -24,9 +25,9 @@ One deep-dive doc per package:
 | Package | Document |
 |---------|----------|
 | base | [BASE_PACKAGE.md](BASE_PACKAGE.md) |
+| shadcn-ui (recommended) | [SHADCN_UI_PACKAGE.md](SHADCN_UI_PACKAGE.md) |
 | styled-base | [STYLED_BASE_PACKAGE.md](STYLED_BASE_PACKAGE.md) |
 | shadcn-radix | [SHADCN_RADIX_PACKAGE.md](SHADCN_RADIX_PACKAGE.md) |
-| shadcn-ui | [SHADCN_UI_PACKAGE.md](SHADCN_UI_PACKAGE.md) |
 | daisyui | [DAISYUI_PACKAGE.md](DAISYUI_PACKAGE.md) |
 | hero-ui | [HERO_UI_PACKAGE.md](HERO_UI_PACKAGE.md) |
 | mui | [MUI_PACKAGE.md](MUI_PACKAGE.md) |

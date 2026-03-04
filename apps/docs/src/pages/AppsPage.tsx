@@ -1,12 +1,12 @@
 import { Text } from '@design-system/typography';
 
 const APPS = [
-  { name: 'MUI', path: '/mui/' },
-  { name: 'Hero UI', path: '/hero-ui/' },
+  { name: 'Shadcn UI (recommended)', path: '/shadcn-ui/' },
   { name: 'Styled Base', path: '/styled-base/' },
   { name: 'Shadcn Radix', path: '/shadcn-redix/' },
-  { name: 'Shadcn UI', path: '/shadcn-ui/' },
+  { name: 'Hero UI', path: '/hero-ui/' },
   { name: 'Daisy UI', path: '/daisy-ui/' },
+  { name: 'MUI', path: '/mui/' },
 ] as const;
 
 export function AppsPage() {

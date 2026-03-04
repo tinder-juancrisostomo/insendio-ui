@@ -11,6 +11,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
+      '@mui/styled-engine': '@mui/styled-engine-sc',
       '@': fileURLToPath(new URL('./src', import.meta.url)),
       '@design-system/typography/css': path.resolve(
         path.dirname(fileURLToPath(import.meta.url)),

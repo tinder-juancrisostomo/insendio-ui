@@ -8,7 +8,7 @@ A **Proof of Concept** to analyze which UI library best fits our next internal p
 |---|---|
 | **Goal** | Choose a UI library for our next internal projects |
 | **Options** | Shadcn, Hero UI, DaisyUI, MUI |
-| **Recommendation** | **Shadcn** – lightweight, Tailwind-native, full control |
+| **Recommendation** | **Shadcn** – speed and reuse; copy-paste pre-built components |
 | **Key risks** | Manual component sync; mitigated by versioning in monorepo |
 | **Next step** | Pilot in one greenfield project (1–2 sprints) |
 
@@ -68,9 +68,9 @@ pnpm install
 pnpm build
 
 # Run a demo app (Insendio with different component libraries)
+pnpm dev:shadcn-ui     # Shadcn (recommended) – copied components
 pnpm dev:styled-base   # Tailwind + tokens on headless base
 pnpm dev:shadcn-radix  # Radix + Tailwind (shadcn's model)
-pnpm dev:shadcn-ui     # Copied shadcn components
 pnpm dev:daisyui       # DaisyUI-styled
 pnpm dev:hero-ui       # Hero UI-styled
 pnpm dev:mui           # MUI-styled
@@ -108,7 +108,8 @@ To evaluate the libraries side by side:
 
 1. Run each app and compare the same Insendio demo:
    ```bash
-   pnpm dev:styled-base   # Tailwind + base (recommended)
+   pnpm dev:shadcn-ui    # Shadcn (recommended) – copied components
+   pnpm dev:styled-base  # Tailwind + base
    pnpm dev:daisyui
    pnpm dev:hero-ui
    pnpm dev:mui
@@ -135,7 +136,7 @@ To evaluate the libraries side by side:
 ## Next Steps
 
 1. **Review** – Share this PoC with the team; discuss the recommendation.
-2. **Pilot** – Pick a greenfield project; use Shadcn for 1–2 sprints.
+2. **Pilot** – Pick a greenfield project; use Shadcn (`@design-system/shadcn-ui`) for 1–2 sprints.
 3. **Retro** – After pilot, confirm or adjust the choice.
 4. **Standardize** – Add Shadcn to our design system; update templates and docs.
 
@@ -172,7 +173,10 @@ See [docs/POC_EVALUATION.md](docs/POC_EVALUATION.md) for details.
 // Base (headless)
 import { Button, Tabs } from '@design-system/base';
 
-// Shadcn-styled
+// Shadcn-styled (recommended)
+import { Button, Tabs } from '@design-system/shadcn-ui';
+
+// Styled Base (Tailwind + headless base)
 import { Button, Tabs } from '@design-system/styled-base';
 
 // HeroUI-styled

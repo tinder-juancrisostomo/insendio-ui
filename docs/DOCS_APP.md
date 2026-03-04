@@ -20,7 +20,7 @@ Or from the repo root: `pnpm --filter docs dev`
 - **Animations** – CSS animation utilities (fade, scale, slide) that respect prefers-reduced-motion
 - **Same components, different styling** – The same base components are rendered with each library's styles
 - **Layout & landmarks** – Layout primitives (Box, Stack, etc.) and ARIA landmarks are also documented
-- **Apps** – Links to full Insendio demo apps (MUI, Hero UI, Styled Base, Shadcn Radix, Shadcn UI, Daisy UI)
+- **Apps** – Links to full Insendio demo apps (Shadcn UI recommended, MUI, Hero UI, Styled Base, Shadcn Radix, Daisy UI)
 
 ## Routes
 

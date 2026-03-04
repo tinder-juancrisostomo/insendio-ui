@@ -18,7 +18,7 @@ We did **not** evaluate:
 | **Performance under load** | Large lists, many re-renders | All use React; similar baseline |
 | **Accessibility audit** | Full WCAG 2.1 audit, screen reader testing | Base follows ARIA APG; formal audit recommended |
 
-**Implication:** The recommendation (Shadcn) holds for typical internal apps. For data-heavy or form-heavy projects, re-evaluate or run a focused spike.
+**Implication:** The recommendation (Shadcn—prioritizing speed and reuse via copy-paste) holds for typical internal apps. For data-heavy or form-heavy projects, re-evaluate or run a focused spike.
 
 ---
 
@@ -76,7 +76,7 @@ The **strangler fig pattern** (from Martin Fowler) is a gradual migration strate
 | **Maintenance** | Medium | We own components; upgrades are manual but controlled |
 | **Vendor lock-in** | None | Copy-paste = no runtime dependency on Shadcn |
 
-**Recommendation:** If the team is already on Tailwind, Shadcn is a natural fit. If not, factor in Tailwind adoption first.
+**Recommendation:** If the team is already on Tailwind, Shadcn (`@design-system/shadcn-ui`) is the recommended choice—speed and reuse via copy-paste. If not, factor in Tailwind adoption first.
 
 ---
 

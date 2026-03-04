@@ -1,15 +1,15 @@
+/**
+ * Adapter: maps Insendio API to shadcn Link from src/components/ui/link
+ */
 import React from 'react';
-import { Link as BaseLink, type LinkProps as BaseLinkProps } from '@design-system/base';
-import { cn } from '@design-system/utils';
+import { Link as ShadcnLink } from './components/ui/link';
 
-export const Link = React.forwardRef<HTMLAnchorElement, BaseLinkProps>(
-  ({ className, ...props }, ref) => (
-    <BaseLink
-      ref={ref}
-      className={cn('text-blue-600 underline-offset-4 hover:underline', className)}
-      {...props}
-    />
-  )
+export interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+  variant?: 'default' | 'muted';
+}
+
+export const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
+  (props, ref) => <ShadcnLink ref={ref} {...props} />
 );
 
 Link.displayName = 'Link';

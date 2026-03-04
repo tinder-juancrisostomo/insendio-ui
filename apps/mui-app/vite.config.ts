@@ -11,6 +11,7 @@ export default defineConfig({
   define: { global: 'globalThis' },
   resolve: {
     alias: {
+      '@mui/styled-engine': '@mui/styled-engine-sc',
       '@': fileURLToPath(new URL('./src', import.meta.url)),
       '@design-system/insendio-app': path.resolve(
         path.dirname(fileURLToPath(import.meta.url)),

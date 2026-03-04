@@ -11,7 +11,7 @@ Tailwind + design tokens on our headless base. No external UI library—full con
 **Dependencies:** `@design-system/base`, `@design-system/tokens`, `@design-system/utils`, `class-variance-authority`  
 **Peer dependencies:** `react` >=18, `react-dom` >=18
 
-Styled Base wraps every base component with Tailwind utility classes and design tokens. It uses **CVA** (class-variance-authority) for variant composition. This is the **recommended** package for new projects (see [UI_LIBRARIES_COMPARISON.md](UI_LIBRARIES_COMPARISON.md)).
+Styled Base wraps every base component with Tailwind utility classes and design tokens. It uses **CVA** (class-variance-authority) for variant composition. Choose Styled Base when you want full control and a single headless base (no Radix). For speed and reuse, **Shadcn** (`@design-system/shadcn-ui`) is the recommended choice (see [UI_LIBRARIES_COMPARISON.md](UI_LIBRARIES_COMPARISON.md)).
 
 ---
 
@@ -63,6 +63,6 @@ const buttonVariants = cva('rounded-lg font-medium ...', {
 
 ## Related
 
-- [UI_LIBRARIES_COMPARISON.md](UI_LIBRARIES_COMPARISON.md) – Recommendation: Styled Base
+- [UI_LIBRARIES_COMPARISON.md](UI_LIBRARIES_COMPARISON.md) – Recommendation: Shadcn
 - [STYLING.md](STYLING.md) – Tailwind, tokens, cn()
 - [BASE_PACKAGE.md](BASE_PACKAGE.md) – Headless foundation

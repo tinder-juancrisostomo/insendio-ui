@@ -1,6 +1,8 @@
 # UI Libraries Comparison
 
-This document provides an overview of the four UI libraries evaluated in this PoC, with pros, cons, and a recommendation for internal projects.
+This document provides an overview of the UI libraries evaluated in this PoC, with pros, cons, and a recommendation for internal projects.
+
+> **Different stack?** If your main styling stack is **styled-components** (not Tailwind), see [UI_LIBRARIES_STYLED_COMPONENTS.md](UI_LIBRARIES_STYLED_COMPONENTS.md) for the adjusted recommendation.
 
 ## Decision Criteria
 
@@ -43,12 +45,32 @@ Measured after `pnpm build` for each app (Insendio demo, same pages):
 
 | App | JS (main chunk) | CSS | Notes |
 |-----|-----------------|-----|-------|
+| **shadcn-ui-app** | 260.5 kB (83 kB gzip) | 41.6 kB | Recommended (copy-paste) |
 | **styled-base-app** | 260.5 kB (83 kB gzip) | 41.6 kB | Baseline |
 | **daisyui-app** | 259.2 kB (83 kB gzip) | 35.0 kB | Smallest CSS (plugin-only) |
 | **hero-ui-app** | 260.5 kB (83 kB gzip) | 41.6 kB | Similar to Shadcn |
 | **mui-app** | 260.5 kB (83 kB gzip) | 41.8 kB | Similar; our MUI package uses Tailwind/tokens |
 
 *Note: In this PoC, all styled packages use Tailwind/tokens, so JS sizes are similar. A full MUI adoption (using @mui/material components directly) would show a larger JS bundle.*
+
+---
+
+## Shadcn (`@design-system/shadcn-ui`)
+
+### Pros
+- **Speed and reuse** – Components are pre-built; copy via CLI, no need to create from scratch
+- **Battle-tested** – Radix UI primitives + Tailwind; accessible, widely adopted
+- **You own the code** – Copy-paste means full control; customize as needed
+- **Minimal footprint** – Only what you copy; no heavy runtime library
+- **Tailwind-native** – Pure utility classes; easy to align with design tokens over time
+
+### Cons
+- **Radix dependency** – Adds Radix primitives (separate from our headless base)
+- **Token alignment** – May need to replace default colors/values with design tokens
+- **Upstream sync** – Manual updates when pulling fixes or new features from shadcn
+
+### Best for
+Teams that prioritize speed and reuse: get proven components fast, own the code, and adapt to design tokens as needed.
 
 ---
 
@@ -121,21 +143,23 @@ Projects that need Material Design compliance or rely heavily on MUI’s advance
 
 ---
 
-## Recommendation: **Styled Base** (Winner)
+## Recommendation: **Shadcn** (Winner)
 
-For our next internal projects, **Styled Base** (`@design-system/styled-base`) is the recommended choice.
+For our next internal projects, **Shadcn** (`@design-system/shadcn-ui`) is the recommended choice.
 
-### Why Styled Base?
+### Why Shadcn?
 
-1. **Alignment with our stack** – Tailwind-first, design tokens, and headless base; no external UI library.
-2. **Minimal footprint** – No heavy runtime deps; pure Tailwind + our base.
-3. **Full ownership** – Components live in our repo; we can adapt them to our design system without fighting library defaults.
-4. **Future-proof** – We control upgrades and maintenance.
-5. **Consistency** – Our base already provides accessibility; styling adds no parallel component model.
+We prioritize **speed and reuse**:
+
+1. **Pre-built components** – Copy via CLI; no need to build dialogs, tabs, menus, etc. from scratch.
+2. **Proven and accessible** – Radix UI + Tailwind; battle-tested, widely adopted.
+3. **You own the code** – Copy-paste means full control; customize and adapt to design tokens as needed.
+4. **Minimal footprint** – Only what you copy; no heavy runtime library.
+5. **Fast iteration** – Get a full component set quickly; refine token alignment over time.
 
 ### When to choose alternatives
 
-- **shadcn-radix / shadcn-ui** – When you want Radix primitives or shadcn's copy-paste model.
+- **Styled Base** – When you want full control, a single headless base (no Radix), and no external component model.
 - **DaisyUI** – For quick internal tools or when semantic theming and zero runtime cost are top priorities.
 - **Hero UI** – When you need a full component library with minimal setup and modern look.
 - **MUI** – When Material Design compliance or MUI’s advanced components (e.g. Data Grid) are required.
@@ -146,8 +170,9 @@ For our next internal projects, **Styled Base** (`@design-system/styled-base`) i
 
 | Library | Main Risk | Mitigation |
 |---------|-----------|------------|
-| **Styled Base** | Manual maintenance | Version in monorepo; document sync process |
-| **Hero UI** | Smaller ecosystem, newer | Monitor adoption; have fallback (Styled Base) if needed |
+| **Shadcn** | Token alignment, upstream sync | Map tokens in copied components; document sync process |
+| **Styled Base** | Manual maintenance | Version in monorepo; have fallback (Shadcn) if needed |
+| **Hero UI** | Smaller ecosystem, newer | Monitor adoption; have fallback (Shadcn) if needed |
 | **DaisyUI** | Override complexity, global styles | Use design tokens; limit DaisyUI to semantic layer; test overrides early |
 | **MUI** | Heavy bundle, Emotion vs Tailwind | Use only if Material Design required; consider MUI Pigment for CSS |
 
@@ -155,11 +180,12 @@ For our next internal projects, **Styled Base** (`@design-system/styled-base`) i
 
 ## Quick Reference
 
-| Criteria | Styled Base | Hero UI | DaisyUI | MUI |
-|----------|-------------|---------|---------|-----|
-| Bundle size | ⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐ | ⭐ |
-| Customization | ⭐⭐⭐ | ⭐⭐ | ⭐⭐ | ⭐ |
-| Theming | ⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ |
-| Ecosystem | ⭐⭐ | ⭐⭐ | ⭐⭐ | ⭐⭐⭐ |
-| Tailwind fit | ⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐ | ⭐ |
-| Our fit | ⭐⭐⭐ | ⭐⭐ | ⭐⭐ | ⭐ |
+| Criteria | Shadcn | Styled Base | Hero UI | DaisyUI | MUI |
+|----------|--------|-------------|---------|---------|-----|
+| Bundle size | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐ | ⭐ |
+| Speed & reuse | ⭐⭐⭐ | ⭐ | ⭐⭐⭐ | ⭐⭐ | ⭐⭐ |
+| Customization | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ | ⭐⭐ | ⭐ |
+| Theming | ⭐⭐ | ⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ |
+| Ecosystem | ⭐⭐⭐ | ⭐⭐ | ⭐⭐ | ⭐⭐ | ⭐⭐⭐ |
+| Tailwind fit | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐ | ⭐ |
+| Our fit | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ | ⭐⭐ | ⭐ |

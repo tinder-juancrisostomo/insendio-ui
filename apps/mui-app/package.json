@@ -10,7 +10,9 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@mui/styled-engine-sc": "^6.1.6",
     "clsx": "^2.1.1",
+    "styled-components": "^6.1.13",
     "tailwind-merge": "^3.5.0",
     "@design-system/icons": "workspace:*",
     "@design-system/insendio-app": "workspace:*",

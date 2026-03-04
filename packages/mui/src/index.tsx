@@ -1,6 +1,6 @@
 /**
  * @design-system/mui
- * Components styled with Material UI - uses MUI components with design system theme
+ * Components styled with Material UI - uses MUI + styled-components with design system theme
  */
 
 export { DesignSystemThemeProvider } from './ThemeProvider';
