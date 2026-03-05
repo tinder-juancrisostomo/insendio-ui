@@ -15,6 +15,26 @@ The `@design-system/daisyui` package provides UI components for the Insendio des
 
 ---
 
+## Why react-daisyui vs. DaisyUI Plugin Classes Only?
+
+DaisyUI is a **Tailwind plugin** that adds semantic CSS classes (`btn`, `alert`, `modal`, etc.). You could use those classes directly on native elements or base components—as we do for Accordion, Breadcrumb, Checkbox, and others. So why do we also use **react-daisyui** for Button, Badge, Input, Menu, etc.?
+
+**Current rationale (historical):**
+
+- **Speed** – react-daisyui provides pre-built React components; no need to wire base + DaisyUI classes for each one.
+- **API mapping** – react-daisyui props (`color`, `variant`, `size`) map easily to our Insendio API.
+- **Official bindings** – react-daisyui is the community React layer for DaisyUI.
+
+**Could we use only the plugin?** Yes. Simple components (Button, Badge, Input, Alert) could use native elements + DaisyUI classes (e.g. `btn btn-primary`). Complex ones (Menu, Switch, Tabs) could use base for behavior + DaisyUI classes—the same pattern as Accordion. That would:
+
+- Remove the react-daisyui dependency (~35–40 KB)
+- Align with the zero-runtime nature of the DaisyUI plugin
+- Match the base + classes approach used for Accordion, Breadcrumb, etc.
+
+The current split is a pragmatic choice, not a technical requirement. A future refactor could standardize on plugin + base only.
+
+---
+
 ## How It Works
 
 ### Architecture

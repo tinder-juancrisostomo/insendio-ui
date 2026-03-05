@@ -28,6 +28,20 @@ We chose **Shadcn**, **Hero UI**, **DaisyUI**, and **MUI** because they represen
 
 We did not include Chakra, Ant Design, or Radix-only because we wanted to compare complete styling solutions, not headless-only or different paradigms.
 
+## Why Shadcn-Radix, Shadcn-UI, and Styled-Base Are the Core Three
+
+**Shadcn-radix**, **shadcn-ui**, and **styled-base** are grouped as the "core three" because they share the same Tailwind-native, design-token-aligned approach—without depending on external UI libraries (DaisyUI plugin, Hero UI, MUI). They are the primary options for teams that want full control over styling and alignment with design tokens.
+
+| Package | Radix | Component source | Best for |
+|---------|-------|------------------|----------|
+| **shadcn-ui** | Yes | Copy-paste via shadcn CLI | Speed and reuse; get pre-built components fast |
+| **shadcn-radix** | Yes | Built in-house | Same model as shadcn; no CLI dependency; full ownership |
+| **styled-base** | No | Built on our headless base | Single base, no Radix; maximum control, minimal deps |
+
+**What they share:** Tailwind + design tokens (`--ds-*`) + CVA for variants. All three produce similar bundle sizes and integrate with our token system.
+
+**When to choose each:** Use **shadcn-ui** for speed (recommended). Use **shadcn-radix** when you want Radix + Tailwind but prefer in-house components over copy-paste. Use **styled-base** when you want to avoid Radix entirely and rely only on our headless base.
+
 ## Overview
 
 | Library | Styling Approach | Key Dependencies | Bundle Impact |

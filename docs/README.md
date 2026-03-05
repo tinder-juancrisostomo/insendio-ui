@@ -20,7 +20,7 @@ Technical documentation for the UI libraries Proof of Concept monorepo.
 
 ## Package Documentation
 
-One deep-dive doc per package:
+One deep-dive doc per package. **Shadcn-radix, shadcn-ui, and styled-base** are the core three Tailwind-native packages—see [UI_LIBRARIES_COMPARISON.md](UI_LIBRARIES_COMPARISON.md#why-shadcn-radix-shadcn-ui-and-styled-base-are-the-core-three) for why.
 
 | Package | Document |
 |---------|----------|
